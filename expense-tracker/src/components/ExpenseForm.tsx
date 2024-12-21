@@ -20,7 +20,9 @@ const ExpenseForm = ({ onSubmit }: Props) => {
 				reset();
 			})}
 		>
-			<h2 className="text-center">Expense Tracker Form</h2>
+			<h2 className="text-center">
+				Expense Tracker Form myclaudistack.netlify.net
+			</h2>
 			<div className="mb-3">
 				<label htmlFor="description" className="form-label">
 					Description
