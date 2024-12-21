@@ -1,5 +1,3 @@
-import { ChangeEvent, FormEvent } from "react";
-
 interface Props {
 	onSearch: (event: string) => void;
 }
@@ -8,7 +6,7 @@ const Search = ({ onSearch }: Props) => {
 		<input
 			type="search"
 			placeholder="Search Item ..."
-			className="form-control w-50 border-1 border-primary"
+			className="form-control border-primary mx-2"
 			onChange={(event) => onSearch(event.target.value)}
 		/>
 	);

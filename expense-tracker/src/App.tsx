@@ -2,26 +2,15 @@ import { useState } from "react";
 import TableLists from "./components/TableLists";
 import Filter from "./components/Filter";
 import Search from "./components/Search";
-interface Expense {
-	id: number;
-	description: string;
-	amount: number;
-	category: string;
-}
+import { Expense } from "./components/Expense";
+import ExpenseForm from "./components/ExpenseForm";
 const App = () => {
 	const [expenses, setExpenses] = useState([
 		{ id: 1, description: "Chair", amount: 300, category: "Utilities" },
 		{ id: 2, description: "Shoes", amount: 100, category: "Entertainment" },
 		{ id: 3, description: "Milk", amount: 200, category: "Food" },
 		{ id: 4, description: "Milk", amount: 200, category: "Food" },
-		{ id: 5, description: "Chair", amount: 300, category: "Utilities" },
-		{ id: 6, description: "Shoes", amount: 100, category: "Entertainment" },
-		{ id: 7, description: "Milk", amount: 200, category: "Food" },
-		{ id: 8, description: "Milk", amount: 200, category: "Food" },
-		{ id: 9, description: "Chair", amount: 300, category: "Utilities" },
-		{ id: 10, description: "Shoes", amount: 100, category: "Entertainment" },
-		{ id: 11, description: "Milk", amount: 200, category: "Food" },
-		{ id: 12, description: "Milk", amount: 200, category: "Food" },
+		{ id: 5, description: "Chair", amount: 300, category: "Utilities" }
 	]);
 	const [selected, setSelected] = useState("");
 	const [searchItem, setSearch] = useState("");
@@ -58,7 +47,8 @@ const App = () => {
 	};
 
 	return (
-		<>
+    <>
+      <ExpenseForm/>
 			<div className="mb-4 d-flex justify-content-between ">
 				<Search onSearch={(text) => setSearch(text)} />
 				<Filter

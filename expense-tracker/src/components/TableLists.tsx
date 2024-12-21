@@ -1,18 +1,10 @@
-import { useState } from "react";
-
-interface Expense {
-	id: number;
-	description: string;
-	amount: number;
-	category: string;
-}
+import { Expense } from "./Expense";
 interface Props {
 	expenses: Expense[];
 	onEdit: (expense: Expense) => void;
 	onDelete: (expense: Expense) => void;
 }
 const TableLists = ({ expenses, onDelete, onEdit }: Props) => {
-	
 	if (expenses.length === 0) {
 		return (
 			<p className="text-center text-secondary">No Expenses Available Now</p>
