@@ -27,15 +27,6 @@ const App = () => {
 	const [searchItem, setSearch] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
 	let originalExpenses = [...expenses];
-	selected &&
-		(originalExpenses = expenses.filter(
-			(expense) => expense.category == selected
-		));
-
-	searchItem &&
-		(originalExpenses = expenses.filter((expense) =>
-			expense.description.toLowerCase().includes(searchItem.toLowerCase())
-		));
 
 	//setting Pagination
 	const itemsPerPage = 5;
@@ -46,6 +37,15 @@ const App = () => {
 	const nextPage = () =>
 		currentPage < totalPages && setCurrentPage((curr) => curr + 1);
 	const prevPage = () => currentPage > 1 && setCurrentPage((curr) => curr - 1);
+	selected &&
+		(originalExpenses = expenses.filter(
+			(expense) => expense.category == selected
+		));
+
+	searchItem &&
+		(originalExpenses = expenses.filter((expense) =>
+			expense.description.toLowerCase().includes(searchItem.toLowerCase())
+		));
 
 	const handleEdit = (expense: Expense) => {
 		const updated = { ...expense, amount: 200 };
@@ -72,24 +72,26 @@ const App = () => {
 				onEdit={handleEdit}
 				onDelete={handleDelete}
 			/>
-			<div className="pagination d-flex justify-content-center">
-				<button
-					type="button"
-					className="btn btn-outline-primary"
-          onClick={prevPage}
-          disabled= {currentPage=== 1}
-				>
-					Prev
-				</button>
-				<button
-					type="button"
-					className="btn btn-outline-primary mx-3"
-          onClick={nextPage}
-          disabled= {currentPage === totalPages}
-				>
-					Next
-				</button>
-			</div>
+			{!selected && searchItem === "" && (
+				<div className="pagination d-flex justify-content-center">
+					<button
+						type="button"
+						className="btn btn-outline-primary"
+						onClick={prevPage}
+						disabled={currentPage === 1}
+					>
+						Prev
+					</button>
+					<button
+						type="button"
+						className="btn btn-outline-primary mx-3"
+						onClick={nextPage}
+						disabled={currentPage === totalPages}
+					>
+						Next
+					</button>
+				</div>
+			)}
 		</>
 	);
 };
