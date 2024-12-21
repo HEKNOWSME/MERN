@@ -1,5 +1,8 @@
+import React from 'react'
 const App = () => {
-	return <div className="text-danger">App</div>;
-};
+  return (
+    <div>App</div>
+  )
+}
 
-export default App;
+export default App
