@@ -1,14 +1,24 @@
 import { useForm } from "react-hook-form";
 import Categories from "./Categories";
 import { Expense } from "./Expense";
-const ExpenseForm = () => {
+interface Props {
+	onSubmit: (expense: Expense) => void;
+}
+const ExpenseForm = ({ onSubmit }: Props) => {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
+		reset,
 	} = useForm<Expense>();
 	return (
-		<form action="" onSubmit={handleSubmit((data) => console.log(data))}>
+		<form
+			action=""
+			onSubmit={handleSubmit((data) => {
+				onSubmit(data);
+				reset();
+			})}
+		>
 			<h2 className="text-center">Expense Tracker Form</h2>
 			<div className="mb-3">
 				<label htmlFor="description" className="form-label">
@@ -18,7 +28,7 @@ const ExpenseForm = () => {
 					{...register("description", {
 						required: "description Required",
 						minLength: {
-							value: 5,
+							value: 3,
 							message: "Item should be at Least 5 charters",
 						},
 					})}

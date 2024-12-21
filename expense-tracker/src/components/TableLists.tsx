@@ -12,8 +12,9 @@ const TableLists = ({ expenses, onDelete, onEdit }: Props) => {
 	}
 	return (
 		<section>
-			<table className="table table-bordered table-striped-columns">
-				<thead className="table-active">
+			<h3 className="text-center">Table shows All Expenses</h3>
+			<table className="table table-bordered table-striped">
+				<thead className="table-dark">
 					<tr>
 						<th scope="col">#</th>
 						<th scope="col">Description</th>
@@ -22,12 +23,10 @@ const TableLists = ({ expenses, onDelete, onEdit }: Props) => {
 						<th scope="col">Actions</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody className="table-secondary">
 					{expenses.map((expense) => (
 						<tr key={expense.id}>
-							<th scope="row" className="table-info">
-								{expense.id}
-							</th>
+							<th scope="row">{expense.id}</th>
 							<td>{expense.description}</td>
 							<td>{expense.amount}</td>
 							<td>{expense.category}</td>
@@ -50,8 +49,8 @@ const TableLists = ({ expenses, onDelete, onEdit }: Props) => {
 						</tr>
 					))}
 				</tbody>
-				<tfoot>
-					<tr className="table-primary">
+				<tfoot className="table-dark">
+					<tr>
 						<th scope="row" colSpan={2}>
 							Total Amount
 						</th>
