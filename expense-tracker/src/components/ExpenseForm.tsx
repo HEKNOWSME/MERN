@@ -11,6 +11,7 @@ const ExpenseForm = ({ onSubmit }: Props) => {
 		formState: { errors },
 		reset,
 	} = useForm<Expense>();
+
 	return (
 		<form
 			action=""

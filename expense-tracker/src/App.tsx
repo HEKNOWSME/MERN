@@ -12,28 +12,34 @@ const App = () => {
 		{ id: 4, description: "Milk", amount: 200, category: "Food" },
 		{ id: 5, description: "Chair", amount: 300, category: "Utilities" },
 	]);
+
 	const [selected, setSelected] = useState("");
 	const [searchItem, setSearch] = useState("");
-  let originalExpenses = [...expenses];
-  
-	selected &&
-		(originalExpenses = expenses.filter(
-			(expense) => expense.category == selected
-		));
-
-	searchItem &&
-		(originalExpenses = expenses.filter((expense) =>
-			expense.description.toLowerCase().includes(searchItem.toLowerCase())
-		));
+	let filteredExpenses = expenses.filter((expense) => {
+		const returnedCategories = expense.category === selected;
+		const searched = expense.description
+			.toLowerCase()
+			.includes(searchItem.toLowerCase());
+		return returnedCategories && searched;
+	});
+	if (filteredExpenses.length === 0) {
+		filteredExpenses = expenses.filter((expense) => {
+			const searched = expense.description
+				.toLowerCase()
+				.includes(searchItem.toLowerCase());
+			const allItems = expense.category !== "";
+			return allItems && searched;
+		});
+	}
 
 	const handleEdit = (expense: Expense) => {
 		const updated = { ...expense, amount: 200 };
 		setExpenses(
-			originalExpenses.map((exp) => (exp.id === expense.id ? updated : exp))
+			filteredExpenses.map((exp) => (exp.id === expense.id ? updated : exp))
 		);
 	};
 	const handleDelete = (expense: Expense) => {
-		setExpenses(originalExpenses.filter((ex) => ex.id !== expense.id));
+		setExpenses(filteredExpenses.filter((ex) => ex.id !== expense.id));
 	};
 
 	const handleAdd = (data: Expense) => {
@@ -51,7 +57,7 @@ const App = () => {
 				/>
 			</div>
 			<TableLists
-				expenses={originalExpenses}
+				expenses={filteredExpenses}
 				onEdit={handleEdit}
 				onDelete={handleDelete}
 			/>
