@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import Categories from "./Categories";
 import { Expense } from "./Expense";
-import { useState } from "react";
 interface Props {
 	onSubmit: (expense: Expense) => void;
 }

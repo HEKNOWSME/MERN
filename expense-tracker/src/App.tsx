@@ -4,6 +4,8 @@ import Filter from "./components/Filter";
 import Search from "./components/Search";
 import { Expense } from "./components/Expense";
 import ExpenseForm from "./components/ExpenseForm";
+import Categories from "./components/Categories";
+import { useForm } from "react-hook-form";
 const App = () => {
 	const [expenses, setExpenses] = useState([
 		{ id: 1, description: "Chair", amount: 300, category: "Utilities" },
@@ -15,6 +17,18 @@ const App = () => {
 	const [selected, setSelected] = useState("");
 	const [searchItem, setSearch] = useState("");
 	const [show, setShow] = useState(false);
+	const [expenseForm, setExpenseForm] = useState({
+		id: 0,
+		amount: 0,
+		category: "",
+		description: "",
+	});
+	const [toEdit, setEdit] = useState(false);
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<Expense>();
 	// filtering
 	let filteredExpenses = expenses.filter((expense) => {
 		const returnedCategories = expense.category === selected;
@@ -33,10 +47,14 @@ const App = () => {
 		});
 	}
 	const handleEdit = (expense: Expense) => {
-		const updated = { ...expense, amount: 200 };
-		setExpenses(
-			filteredExpenses.map((exp) => (exp.id === expense.id ? updated : exp))
-		);
+		setEdit(true);
+		setShow(false);
+		setExpenseForm({
+			id: expense.id,
+			description: expense.description,
+			amount: expense.amount,
+			category: expense.category,
+		});
 	};
 	const handleDelete = (expense: Expense) => {
 		setExpenses(filteredExpenses.filter((ex) => ex.id !== expense.id));
@@ -46,19 +64,118 @@ const App = () => {
 		setExpenses([...expenses, { ...data, id: expenses.length + 1 }]);
 		setShow(false);
 	};
+
 	return (
 		<>
 			<div className="d-flex justify-content-end">
 				<button
 					type="button"
 					className="btn btn-primary"
-					onClick={() => setShow(!show)}
+					onClick={() => {
+						setShow(!show);
+						setEdit(false);
+					}}
 				>
 					Add Expenses
 				</button>
 			</div>
 			<h2 className="text-center">Expenses Tracker</h2>
 			{show && <ExpenseForm onSubmit={handleAdd} />}
+			{toEdit && (
+				<form
+					onSubmit={handleSubmit(() => {
+						setExpenses(
+							expenses.map((expense) =>
+								expense.id === expenseForm.id ? expenseForm : expense
+							)
+						);
+						setEdit(false);
+					})}
+				>
+					<div className="mb-3">
+						<label htmlFor="description" className="form-label">
+							Description
+						</label>
+						<input
+							{...register("description", {
+								required: "description Required",
+								minLength: {
+									value: 3,
+									message: "Item should be at Least 5 charters",
+								},
+							})}
+							type="text"
+							name="description"
+							id="description"
+							className="form-control border-primary"
+							value={expenseForm.description}
+							onChange={(e) =>
+								setExpenseForm({ ...expenseForm, description: e.target.value })
+							}
+						/>
+						{errors.description && (
+							<span className="text-danger">{errors.description.message}</span>
+						)}
+					</div>
+					<div className="mb-3">
+						<label htmlFor="amount" className="form-label">
+							Amount
+						</label>
+						<input
+							{...register("amount", {
+								required: "amount Required",
+								valueAsNumber: true,
+								min: {
+									value: 1,
+									message: "Do not go below 1",
+								},
+							})}
+							type="number"
+							name="amount"
+							id="amount"
+							className="form-control border-primary"
+							min={0}
+							value={expenseForm.amount}
+							onChange={(e) => {
+								setExpenseForm({
+									...expenseForm,
+									amount: parseInt(e.target?.value),
+								});
+							}}
+						/>
+						{errors.amount && (
+							<span className="text-danger">{errors.amount.message}</span>
+						)}
+					</div>
+					<div className="mb-3">
+						<select
+							{...register("category", { required: "Category is required" })}
+							name="category"
+							aria-label="category"
+							className="form-select border-primary"
+							value={expenseForm.category}
+							onChange={(e) => {
+								setExpenseForm({ ...expenseForm, category: e.target.value });
+							}}
+						>
+							<option value="">Select</option>
+							{Categories.map((cat) => (
+								<option key={cat} value={cat}>
+									{cat}
+								</option>
+							))}
+						</select>
+						{errors.category && (
+							<span className="text-danger">{errors.category.message}</span>
+						)}
+					</div>
+					<div className="mb-5">
+						<button type="submit" className="btn btn-primary">
+							Submit
+						</button>
+					</div>
+				</form>
+			)}
 			<div className="mb-4 d-flex justify-content-between ">
 				<Search
 					onSearch={(text) => {
