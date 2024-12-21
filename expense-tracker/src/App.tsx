@@ -17,7 +17,6 @@ const App = () => {
 
 	const [selected, setSelected] = useState("");
 	const [searchItem, setSearch] = useState("");
-	const [currentPage, setPage] = useState(1);
 	// filtering
 	let filteredExpenses = expenses.filter((expense) => {
 		const returnedCategories = expense.category === selected;
@@ -36,19 +35,6 @@ const App = () => {
 		});
 	}
 	// pagination
-	const numberOfExpenses = 5;
-	const numberOfPages = Math.ceil(filteredExpenses.length / numberOfExpenses);
-	const startIndex = (currentPage - 1) * numberOfExpenses;
-	const endIndex = startIndex + numberOfExpenses;
-
-	filteredExpenses = filteredExpenses.slice(startIndex, endIndex);
-	const nextPage = () => {
-		currentPage < numberOfPages && setPage((page) => page + 1);
-	};
-	const prevPage = () => {
-		currentPage > 1 && setPage((page) => page - 1);
-	};
-
 	const handleEdit = (expense: Expense) => {
 		const updated = { ...expense, amount: 200 };
 		setExpenses(
@@ -69,7 +55,6 @@ const App = () => {
 				<Search
 					onSearch={(text) => {
 						setSearch(text);
-						setPage(1);
 					}}
 				/>
 				<Filter
@@ -83,7 +68,9 @@ const App = () => {
 					All Expenses <span className="badge bg-black">{expenses.length}</span>
 				</span>
 				<span>
-           <span className="badge bg-black">{filteredExpenses.length} in {expenses.length}</span>
+					<span className="badge bg-black">
+						{filteredExpenses.length} in {expenses.length}
+					</span>
 				</span>
 			</div>
 			<TableLists
@@ -91,25 +78,6 @@ const App = () => {
 				onEdit={handleEdit}
 				onDelete={handleDelete}
 			/>
-
-			<div className="mb3 d-flex justify-content-between">
-				<button
-					type="button"
-					className="btn btn-outline-primary"
-					disabled={currentPage === 1}
-					onClick={prevPage}
-				>
-					Prev
-				</button>
-				<button
-					type="button"
-					className="btn btn-outline-primary"
-					onClick={nextPage}
-					disabled={currentPage === numberOfPages}
-				>
-					Next
-				</button>
-			</div>
 		</>
 	);
 };
