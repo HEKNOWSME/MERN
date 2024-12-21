@@ -13,7 +13,6 @@ const ExpenseForm = ({ onSubmit }: Props) => {
 		reset,
 	} = useForm<Expense>();
 
-	const [expenseForm, setExpenseForm] = useState<Expense>();
 	return (
 		<form
 			action=""
@@ -22,9 +21,7 @@ const ExpenseForm = ({ onSubmit }: Props) => {
 				reset();
 			})}
 		>
-			<h2 className="text-center">
-				Expense Tracker Form claudistack.netlify.app
-			</h2>
+			
 			<div className="mb-3">
 				<label htmlFor="description" className="form-label">
 					Description
@@ -37,7 +34,6 @@ const ExpenseForm = ({ onSubmit }: Props) => {
 							message: "Item should be at Least 5 charters",
 						},
 					})}
-					value={expenseForm?.description}
 					type="text"
 					name="description"
 					id="description"
@@ -65,7 +61,6 @@ const ExpenseForm = ({ onSubmit }: Props) => {
 					id="amount"
 					className="form-control border-primary"
 					min={0}
-					value={expenseForm?.amount}
 				/>
 				{errors.amount && (
 					<span className="text-danger">{errors.amount.message}</span>
@@ -77,7 +72,6 @@ const ExpenseForm = ({ onSubmit }: Props) => {
 					name="category"
 					aria-label="category"
 					className="form-select border-primary"
-					value={expenseForm?.category}
 				>
 					<option value="">Select</option>
 					{Categories.map((cat) => (
