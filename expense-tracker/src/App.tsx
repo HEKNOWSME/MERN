@@ -139,7 +139,7 @@ const App = () => {
 							onChange={(e) => {
 								setExpenseForm({
 									...expenseForm,
-									amount: parseInt(e.target?.value),
+									amount: e.target.value ? parseInt(e.target.value): 0,
 								});
 							}}
 						/>
