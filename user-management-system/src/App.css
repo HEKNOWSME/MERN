@@ -1,0 +1,18 @@
+.grid {
+   min-height: 100vh;
+   display: grid;
+   grid-template-columns: max-content 1fr;
+   grid-template-areas: 
+   "sidebar navbar"
+   "sidebar main"
+   "sidebar main"
+   "footer footer"
+   ;
+   grid-template-rows: auto 1fr;
+   
+}
+.three {
+   background-color: #20232A;
+   color: #E6E6E6;
+   grid-area: main;
+}

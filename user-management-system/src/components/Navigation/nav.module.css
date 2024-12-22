@@ -5,10 +5,20 @@
     --text-primary: #E6E6E6;
     --text-secondary: #8892B0;
 }
+
 .nav {
-   background: var(--accent);
+   background: var(--secondary);
    color: var(--text-primary);
+   display: flex;
+   align-items: center;
+   flex-grow: 1;
+   padding-left: 1rem;
+   height: 5rem;
+   grid-area: navbar;
+   position: sticky;
+   top: 0;
 }
+
 .input-group {
    border-radius: 5px;
    gap: 1rem;
@@ -45,7 +55,9 @@
 }
 .profile-card {
    right: 0;
-   top: 4.1rem;
+   top: 5.1rem;
+   border-radius: 0 0 5px 5px;
+   border-top: 0;
    transform: scaleY(0);
    transform-origin: top;
    transition: all .3s;

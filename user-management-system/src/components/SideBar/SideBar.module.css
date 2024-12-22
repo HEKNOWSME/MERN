@@ -1,0 +1,58 @@
+:root {
+	--accent: #20232A;
+    --primary: #5ccceb;
+    --secondary: #282C34;
+    --text-primary: #E6E6E6;
+    --text-secondary: #8892B0;
+}
+
+.sideBar {
+   position: sticky;
+   top: 0;
+   height: 100vh;
+   grid-area: sidebar;
+   background-color: var(--secondary);
+   color: var(--text-primary);
+   width: 200px;
+}
+.minBar {
+   height: 11%;
+   border-bottom: 1px solid #fff;
+   display: flex;
+   align-items: center ;
+   justify-content: space-between;
+   padding: 1rem;
+}
+.heading {
+   display: block;
+}
+.main {
+   height: 89%;
+}
+.media {
+   display: flex;
+   align-items: center;
+   padding: 1rem;
+   gap: 2rem;
+}
+.media-content {
+   font-size: 1.4rem;
+   display: block;
+}
+.toggled.sideBar {
+   width: 5rem;
+}
+
+.toggled .media-content {
+   display: none;
+}
+.toggled .heading {
+   display: none;
+}
+.toggled .minBar, .toggled .media {
+   justify-content: center;
+}
+
+.btn {
+   cursor: pointer;
+}

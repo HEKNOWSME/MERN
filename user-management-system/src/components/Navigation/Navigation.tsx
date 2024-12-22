@@ -11,9 +11,7 @@ const Navigation = ({ onSearch }: Props) => {
 	});
 	return (
 		<nav
-			className={`navbar ${[styles.nav, nav.isLight && styles.isLight].join(
-				" "
-			)}`}
+			className={` ${[styles.nav, nav.isLight && styles.isLight].join(" ")}`}
 		>
 			<div className={`d-flex align-items-center ${styles["input-group"]} p-2`}>
 				<BsSearch color="black" />
@@ -46,9 +44,14 @@ const Navigation = ({ onSearch }: Props) => {
 				</div>
 			</div>
 			<div
-				className={`card p-2 position-absolute ${[styles['profile-card'], !nav.image && styles.expanded].join(" ")}`}
-         >
-            <a href="#" className="link-primary link-underline-opacity-0">Logout</a>
+				className={`card p-2 position-absolute ${[
+					styles["profile-card"],
+					!nav.image && styles.expanded,
+				].join(" ")}`}
+			>
+				<a href="#" className="link-primary link-underline-opacity-0">
+					Logout
+				</a>
 			</div>
 		</nav>
 	);
