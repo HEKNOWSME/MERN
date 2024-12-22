@@ -1,6 +1,10 @@
+import Alert from "./components/Alert"
+
 const App = () => {
   return (
-    <div className="">App</div>
+    <div className="">
+      <Alert/>
+    </div>
   )
 }
 
