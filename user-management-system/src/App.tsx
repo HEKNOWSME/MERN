@@ -8,14 +8,15 @@ const App = () => {
 		<div className="grid">
 			<Navigation
 				onSearch={(data) => {
-          setSearch(data.toLowerCase());
+					setSearch(data.toLowerCase());
 					console.log(searchItem);
 				}}
-        />
-        <SideBar/>
-      <div className="three">
-        <h1>Main</h1>
-      </div>
+
+			/>
+			<SideBar/>
+			<div className="three">
+				<h1>Main</h1>
+			</div>
 		</div>
 	);
 };

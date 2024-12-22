@@ -34,10 +34,15 @@
    align-items: center;
    padding: 1rem;
    gap: 2rem;
+
 }
 .media-content {
    font-size: 1.4rem;
    display: block;
+   cursor: pointer;
+}
+.mediaIcon {
+   cursor: pointer;
 }
 .toggled.sideBar {
    width: 5rem;
