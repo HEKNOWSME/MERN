@@ -1,0 +1,57 @@
+:root {
+	--accent: #20232A;
+    --primary: #5ccceb;
+    --secondary: #282C34;
+    --text-primary: #E6E6E6;
+    --text-secondary: #8892B0;
+}
+.nav {
+   background: var(--accent);
+   color: var(--text-primary);
+}
+.input-group {
+   border-radius: 5px;
+   gap: 1rem;
+   background-color: #fff;
+   height: 3rem;
+}
+.input {
+   border: 0;
+   outline: none;
+}
+.profile {
+   width: 32px;
+   height: 32px;
+   border-radius: 50%;
+   margin-left: 1rem;
+}
+.navList {
+   margin-right: 2rem;
+   gap: 1rem;
+}
+.isLight.nav{
+   background-color: #ffffff;
+   color: var(--secondary);
+   box-shadow: 0 2px #f4f4f5;
+   transition: all .3s;
+}
+.isLight .input-group {
+   border: 1px solid #e9e9ec;
+   border-radius: 5px;
+   box-shadow: 1px 1px 1px 1px #e2e2ed inset;
+}
+.icon , .profile{
+   cursor: pointer;
+}
+.profile-card {
+   right: 0;
+   top: 4.1rem;
+   transform: scaleY(0);
+   transform-origin: top;
+   transition: all .3s;
+
+}
+
+.profile-card.expanded {
+   transform: scaleY(1);
+}

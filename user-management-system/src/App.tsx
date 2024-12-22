@@ -1,11 +1,18 @@
-import Alert from "./components/Alert"
+import { useState } from "react";
+import Navigation from "./components/Navigation/Navigation";
 
 const App = () => {
-  return (
-    <div className="">
-      <Alert/>
-    </div>
-  )
-}
+	const [searchItem, setSearch] = useState("");
+	return (
+		<div className="">
+			<Navigation
+				onSearch={(data) => {
+					setSearch(data.toLowerCase());
+					console.log(searchItem);
+				}}
+			/>
+		</div>
+	);
+};
 
-export default App
+export default App;
