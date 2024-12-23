@@ -10,7 +10,7 @@ interface Props {
 const Navigation = ({ onSearch, onToggle }: Props) => {
 	const [nav, setNav] = useState({
 		isLight: true,
-		image: true,
+		image: false,
 	});
 	const [toggled, setToggled] = useState(false);
 

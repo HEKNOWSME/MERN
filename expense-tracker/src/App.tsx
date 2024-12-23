@@ -4,8 +4,7 @@ import Filter from "./components/Filter";
 import Search from "./components/Search";
 import { Expense } from "./components/Expense";
 import ExpenseForm from "./components/ExpenseForm";
-import Categories from "./components/Categories";
-import { useForm } from "react-hook-form";
+import FormEdit from "./components/FormEdit";
 const App = () => {
 	const [expenses, setExpenses] = useState([
 		{ id: 1, description: "Chair", amount: 300, category: "Utilities" },
@@ -17,18 +16,13 @@ const App = () => {
 	const [selected, setSelected] = useState("");
 	const [searchItem, setSearch] = useState("");
 	const [show, setShow] = useState(false);
-	const [expenseForm, setExpenseForm] = useState({
+	const [toEdit, setEdit] = useState(false);
+	const [expense, setExpense] = useState({
 		id: 0,
+		description: "",
 		amount: 0,
 		category: "",
-		description: "",
 	});
-	const [toEdit, setEdit] = useState(false);
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-	} = useForm<Expense>();
 	// filtering
 	let filteredExpenses = expenses.filter((expense) => {
 		const returnedCategories = expense.category === selected;
@@ -46,14 +40,14 @@ const App = () => {
 			return allItems && searched;
 		});
 	}
-	const handleEdit = (expense: Expense) => {
+	const handleEdit = (data: Expense) => {
 		setEdit(true);
 		setShow(false);
-		setExpenseForm({
-			id: expense.id,
-			description: expense.description,
-			amount: expense.amount,
-			category: expense.category,
+		setExpense({
+			id: data.id,
+			description: data.description,
+			amount: data.amount,
+			category: data.category,
 		});
 	};
 	const handleDelete = (expense: Expense) => {
@@ -82,99 +76,26 @@ const App = () => {
 			<h2 className="text-center">Expenses Tracker</h2>
 			{show && <ExpenseForm onSubmit={handleAdd} />}
 			{toEdit && (
-				<form
-					onSubmit={handleSubmit(() => {
+				<FormEdit
+					description={expense.description}
+					amount={expense.amount}
+					category={expense.category}
+					onEdit={(data) => {
+						setEdit(false);
 						setExpenses(
-							expenses.map((expense) =>
-								expense.id === expenseForm.id ? expenseForm : expense
+							expenses.map((exp) =>
+								exp.id == expense.id
+									? {
+											id: expense.id,
+											amount: data.amount,
+											category: data.category,
+											description: data.description,
+									  }
+									: exp
 							)
 						);
-						setEdit(false);
-					})}
-				>
-					<div className="mb-3">
-						<label htmlFor="description" className="form-label">
-							Description
-						</label>
-						<input
-							{...register("description", {
-								required: "description Required",
-								minLength: {
-									value: 3,
-									message: "Item should be at Least 5 charters",
-								},
-							})}
-							type="text"
-							name="description"
-							id="description"
-							className="form-control border-primary"
-							value={expenseForm.description}
-							onChange={(e) =>
-								setExpenseForm({ ...expenseForm, description: e.target.value })
-							}
-						/>
-						{errors.description && (
-							<span className="text-danger">{errors.description.message}</span>
-						)}
-					</div>
-					<div className="mb-3">
-						<label htmlFor="amount" className="form-label">
-							Amount
-						</label>
-						<input
-							{...register("amount", {
-								required: "amount Required",
-								valueAsNumber: true,
-								min: {
-									value: 1,
-									message: "Do not go below 1",
-								},
-							})}
-							type="number"
-							name="amount"
-							id="amount"
-							className="form-control border-primary"
-							min={0}
-							value={expenseForm.amount}
-							onChange={(e) => {
-								setExpenseForm({
-									...expenseForm,
-									amount: e.target.value ? parseInt(e.target.value): 0,
-								});
-							}}
-						/>
-						{errors.amount && (
-							<span className="text-danger">{errors.amount.message}</span>
-						)}
-					</div>
-					<div className="mb-3">
-						<select
-							{...register("category", { required: "Category is required" })}
-							name="category"
-							aria-label="category"
-							className="form-select border-primary"
-							value={expenseForm.category}
-							onChange={(e) => {
-								setExpenseForm({ ...expenseForm, category: e.target.value });
-							}}
-						>
-							<option value="">Select</option>
-							{Categories.map((cat) => (
-								<option key={cat} value={cat}>
-									{cat}
-								</option>
-							))}
-						</select>
-						{errors.category && (
-							<span className="text-danger">{errors.category.message}</span>
-						)}
-					</div>
-					<div className="mb-5">
-						<button type="submit" className="btn btn-primary">
-							Submit
-						</button>
-					</div>
-				</form>
+					}}
+				/>
 			)}
 			<div className="mb-4 d-flex justify-content-between ">
 				<Search
@@ -195,7 +116,7 @@ const App = () => {
 			</div>
 			<TableLists
 				expenses={filteredExpenses}
-				onEdit={handleEdit}
+				onEdit={(data) => handleEdit(data)}
 				onDelete={handleDelete}
 			/>
 		</>
