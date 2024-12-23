@@ -33,12 +33,11 @@
    transform: scale(1.2);
 }
 .logout {
-   transform: rotate(180deg) translateY(-3px);
    cursor: pointer;
    transition: all .3s;
 }
 .logout:hover {
 
-   transform: rotate(180deg) translateY(-3px) translateX(-3px);
+   transform: translateX(3px);
    transition: all .3s;
 }

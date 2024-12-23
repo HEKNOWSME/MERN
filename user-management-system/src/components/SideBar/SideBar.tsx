@@ -1,6 +1,4 @@
-import { BsList } from "react-icons/bs";
-import { MdDashboard, MdSettings } from "react-icons/md";
-import { BiUser } from "react-icons/bi";
+import { LuUsers, LuList, LuLayoutDashboard, LuSettings } from "react-icons/lu";
 import styles from "./SideBar.module.css";
 import { useState } from "react";
 interface Props {
@@ -19,25 +17,25 @@ const SideBar = ({ isToggled = false }: Props) => {
 			<div className={`${styles.minBar} fw-bolder`}>
 				<h4 className={styles.heading}>UserHub Pro</h4>
 				<i className={styles.btn} onClick={() => setToggled(!toggled)}>
-					<BsList size={35} />
+					<LuList size={35} />
 				</i>
 			</div>
 			<section className={`${styles.main}`}>
 				<article className={`${styles.media}`}>
 					<i className={styles.mediaIcon}>
-						<MdDashboard size={25} />
+						<LuLayoutDashboard size={25} />
 					</i>
 					<span className={`${styles["media-content"]}`}>Dashboard</span>
 				</article>
 				<article className={`${styles.media}`}>
 					<i className={styles.mediaIcon}>
-						<BiUser size={25} />
+						<LuUsers size={25} />
 					</i>
 					<span className={`${styles["media-content"]}`}>Users</span>
 				</article>
 				<article className={`${styles.media}`}>
 					<i className={styles.mediaIcon}>
-						<MdSettings size={25} />
+						<LuSettings size={25} />
 					</i>
 					<span className={`${styles["media-content"]}`}>Settings</span>
 				</article>

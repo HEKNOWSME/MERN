@@ -1,5 +1,5 @@
 import styles from "./Card.module.css";
-import { BiUser, BiLogOut } from "react-icons/bi";
+import { LuUser, LuLogOut } from "react-icons/lu";
 interface Props {
 	children: string;
 	image: string;
@@ -23,13 +23,13 @@ const CardDrop = ({ children, image, toggle = false }: Props) => {
 			<ul className={styles.list}>
 				<li className={`list-group-item ${styles.media}`}>
 					<i className={`${[styles.icon, styles.user].join(" ")}`}>
-						<BiUser />
+						<LuUser />
 					</i>
 					<span className={styles.span}>View Profile</span>
 				</li>
 				<li className={`list-group-item ${styles.media}`}>
 					<i className={`${[styles.logout, styles.icon].join(" ")}`}>
-						<BiLogOut />
+						<LuLogOut />
 					</i>
 					<span>Logout</span>
 				</li>

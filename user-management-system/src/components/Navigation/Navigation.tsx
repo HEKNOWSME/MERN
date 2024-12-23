@@ -1,4 +1,4 @@
-import { BsSearch, BsMoon, BsSun } from "react-icons/bs";
+import { LuSearch, LuMoon, LuSun } from "react-icons/lu";
 import styles from "./nav.module.css";
 import { useState } from "react";
 import CardDrop from "../DropDown/CardDrop";
@@ -19,7 +19,7 @@ const Navigation = ({ onSearch, onToggle }: Props) => {
 			className={` ${[styles.nav, !nav.isLight && styles.isLight].join(" ")}`}
 		>
 			<div className={`d-flex align-items-center ${styles["input-group"]} p-2`}>
-				<BsSearch color="black" />
+				<LuSearch color="black" />
 				<input
 					type="search"
 					name="search"
@@ -40,7 +40,7 @@ const Navigation = ({ onSearch, onToggle }: Props) => {
 					}}
 					className={styles.icon}
 				>
-					{nav.isLight ? <BsSun /> : <BsMoon size={20} />}
+					{nav.isLight ? <LuSun /> : <LuMoon size={20} />}
 				</i>
 				<div className="d-flex justify-content-between align-items-center">
 					<span>Claudistack</span>
