@@ -21,6 +21,7 @@
 .toggled {
    grid-area: main;
    z-index: 0;
+   padding: .7rem;
    background-color: #fff;
    color: #282C34;
    box-shadow: 2px 2px 2px 2px #eae5e5 inset;

@@ -71,6 +71,11 @@ const App = () => {
 
 			{App.user && (
 				<div className={toggle ? "toggled" : "users"}>
+					<div className="d-flex justify-content-end">
+						<button type="button" className="btn btn-primary mb-3">
+							Add User
+						</button>
+					</div>
 					<GetUsers users={filtered} toggled={!toggle} />
 					<div className={`flex ${filtered.length == 0 && "visually-hidden"}`}>
 						<button
