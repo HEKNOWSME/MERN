@@ -1,6 +1,5 @@
 .grid {
    width: 100%;
-   max-width: 768%;
    min-height: 100vh;
    display: grid;
    grid-template-columns: max-content 1fr;
@@ -10,5 +9,19 @@
    "sidebar main"
    ;
    grid-template-rows: auto 1fr;
+   position: relative;
    
+}
+.users {
+   grid-area: main;
+   padding: .7rem;
+   z-index: 0;
+   background-color: #20232A;
+}
+.toggled {
+   grid-area: main;
+   z-index: 0;
+   background-color: #fff;
+   color: #282C34;
+   box-shadow: 2px 2px 2px 2px #eae5e5 inset;
 }

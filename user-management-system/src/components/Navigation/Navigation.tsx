@@ -5,9 +5,10 @@ import CardDrop from "../DropDown/CardDrop";
 
 interface Props {
 	onSearch: (text: string) => void;
+	toUser: boolean;
 	onToggle: () => void;
 }
-const Navigation = ({ onSearch, onToggle }: Props) => {
+const Navigation = ({ onSearch, onToggle, toUser = false }: Props) => {
 	const [nav, setNav] = useState({
 		isLight: true,
 		image: false,
@@ -27,6 +28,7 @@ const Navigation = ({ onSearch, onToggle }: Props) => {
 					className={styles.input}
 					placeholder="Search Users"
 					onChange={(e) => onSearch(e.target.value)}
+					disabled={!toUser}
 				/>
 			</div>
 			<div
