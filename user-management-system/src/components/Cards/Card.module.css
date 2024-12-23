@@ -1,8 +1,53 @@
+.cards {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   grid-template-rows: repeat(3, 1fr);
+   grid-template-areas: 
+   "one two"
+   "three three"
+   "four five";
+   gap: 2rem;
+}
+@media screen and (max-width: 768px) {
+   .cards {
+   grid-template-columns: 1fr;
+   grid-template-areas: 
+   "one"
+   "two"
+   "three"
+   "four"
+   "five";
+   gap: .4rem;
+}
+}
 .card {
    background-color: #282C34;;
    color: #E6E6E6;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+   padding: 1rem;
 }
 .card-header {
    display: flex;
    justify-content: space-between;
+   flex-direction: column;
+   flex-grow: 1;
+}
+.cardBody {
+   margin-right: 1rem;
+}
+.one {
+   grid-area: one;
+}
+.two {
+   grid-area: two;
+}
+.three {
+   grid-area: three;
+}
+.toggled .card{
+   background-color: #ffffff;
+   color: #282C34;
 }

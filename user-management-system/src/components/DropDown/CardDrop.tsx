@@ -31,7 +31,7 @@ const CardDrop = ({ children, image, toggle = false }: Props) => {
 					<i className={`${[styles.logout, styles.icon].join(" ")}`}>
 						<LuLogOut />
 					</i>
-					<span>Logout</span>
+					<span className={styles.span}>Logout</span>
 				</li>
 			</ul>
 		</div>

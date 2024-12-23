@@ -6,7 +6,7 @@ interface Props {
 const Main = ({ isToggled = true }: Props) => {
 	return (
 		<main className={`${[styles.main, isToggled && styles.toggled].join(" ")}`}>
-			<Card />
+			<Card isToggled={isToggled} />
 		</main>
 	);
 };
