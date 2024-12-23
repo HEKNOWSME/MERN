@@ -1,4 +1,6 @@
 .grid {
+   width: 100%;
+   max-width: 768%;
    min-height: 100vh;
    display: grid;
    grid-template-columns: max-content 1fr;
@@ -6,7 +8,6 @@
    "sidebar navbar"
    "sidebar main"
    "sidebar main"
-   "footer footer"
    ;
    grid-template-rows: auto 1fr;
    

@@ -55,9 +55,6 @@
 .toggled .heading {
    display: none;
 }
-.toggled .minBar, .toggled .media {
-   justify-content: center;
-}
 
 .btn {
    cursor: pointer;
@@ -87,4 +84,15 @@
 
 .isToggled .minBar:hover:before {
    transform: scaleY(.7);
+}
+@media screen and (max-width: 768px) {
+   .heading {
+   display: none;
+}
+.media-content {
+   display: none;
+}
+.sideBar {
+   width: 5rem;
+}
 }
