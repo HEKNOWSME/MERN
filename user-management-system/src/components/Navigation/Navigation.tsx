@@ -1,17 +1,22 @@
 import { BsSearch, BsMoon, BsSun } from "react-icons/bs";
 import styles from "./nav.module.css";
 import { useState } from "react";
+import CardDrop from "../DropDown/CardDrop";
+
 interface Props {
 	onSearch: (text: string) => void;
+	onToggle: () => void;
 }
-const Navigation = ({ onSearch }: Props) => {
+const Navigation = ({ onSearch, onToggle }: Props) => {
 	const [nav, setNav] = useState({
 		isLight: true,
 		image: true,
 	});
+	const [toggled, setToggled] = useState(false);
+
 	return (
 		<nav
-			className={` ${[styles.nav, nav.isLight && styles.isLight].join(" ")}`}
+			className={` ${[styles.nav, !nav.isLight && styles.isLight].join(" ")}`}
 		>
 			<div className={`d-flex align-items-center ${styles["input-group"]} p-2`}>
 				<BsSearch color="black" />
@@ -28,10 +33,14 @@ const Navigation = ({ onSearch }: Props) => {
 				className={`d-flex align-items-center flex-grow-1 justify-content-end ${styles.navList}`}
 			>
 				<i
-					onClick={() => setNav({ ...nav, isLight: !nav.isLight })}
+					onClick={() => {
+						setNav({ ...nav, isLight: !nav.isLight });
+						onToggle();
+						setToggled(!toggled);
+					}}
 					className={styles.icon}
 				>
-					{!nav.isLight ? <BsSun /> : <BsMoon size={20} />}
+					{nav.isLight ? <BsSun /> : <BsMoon size={20} />}
 				</i>
 				<div className="d-flex justify-content-between align-items-center">
 					<span>Claudistack</span>
@@ -44,14 +53,14 @@ const Navigation = ({ onSearch }: Props) => {
 				</div>
 			</div>
 			<div
-				className={`card p-2 position-absolute ${[
+				className={`${[
 					styles["profile-card"],
-					!nav.image && styles.expanded,
+					nav.image && styles.expanded,
 				].join(" ")}`}
 			>
-				<a href="#" className="link-primary link-underline-opacity-0">
-					Logout
-				</a>
+				<CardDrop image="profile.png" toggle={toggled}>
+					Claudistack
+				</CardDrop>
 			</div>
 		</nav>
 	);

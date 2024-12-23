@@ -11,8 +11,3 @@
    grid-template-rows: auto 1fr;
    
 }
-.three {
-   background-color: #20232A;
-   color: #E6E6E6;
-   grid-area: main;
-}

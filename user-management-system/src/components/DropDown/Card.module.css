@@ -1,0 +1,44 @@
+.card {
+   width: 10rem;
+   border-radius: 0 0 5px 5px;
+   border-top: 0;
+   background-color: #282C34;
+   color: #E6E6E6;
+}
+.profile {
+   width: 32px;
+   height: 32px;
+   border-radius: 50%;
+   margin-left: 1rem;
+   cursor: pointer;
+}
+.card-secondary {
+   background-color: #fff;
+   color: #282C34;
+}
+.list {
+   padding-left: 1rem;
+}
+.media {
+   display: flex;
+   align-items: center;
+   gap: 1rem;
+   padding: .3rem;
+   padding-left: 0;
+}
+.span:hover , .icon:hover{
+   cursor: pointer;
+}
+.user:hover {
+   transform: scale(1.2);
+}
+.logout {
+   transform: rotate(180deg) translateY(-3px);
+   cursor: pointer;
+   transition: all .3s;
+}
+.logout:hover {
+
+   transform: rotate(180deg) translateY(-3px) translateX(-3px);
+   transition: all .3s;
+}

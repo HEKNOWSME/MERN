@@ -1,0 +1,15 @@
+.main {
+   grid-area: main;
+   background-color: #20232A;
+   color: #E6E6E6;
+   padding: .7rem;
+   z-index: 0;
+}
+.toggled {
+   background-color: #ffffff;
+   color: var(--secondary);
+   box-shadow: 0 2px #f4f4f5;
+}
+.toggled.main {
+   box-shadow: 2px 2px 2px 2px #eae5e5 inset;
+}

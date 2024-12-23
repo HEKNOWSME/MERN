@@ -13,7 +13,7 @@
    grid-area: sidebar;
    background-color: var(--secondary);
    color: var(--text-primary);
-   width: 200px;
+   width: 180px;
 }
 .minBar {
    height: 11%;
@@ -24,6 +24,7 @@
    padding: 1rem;
 }
 .heading {
+   font-size: 1.2rem;
    display: block;
 }
 .main {
@@ -33,11 +34,11 @@
    display: flex;
    align-items: center;
    padding: 1rem;
-   gap: 2rem;
+   gap: 1rem;
 
 }
 .media-content {
-   font-size: 1.4rem;
+   font-size: 1.3rem;
    display: block;
    cursor: pointer;
 }
@@ -60,4 +61,30 @@
 
 .btn {
    cursor: pointer;
+}
+.isToggled {
+   background-color: #ffffff;
+   color: var(--secondary);
+   box-shadow: 0 2px #f4f4f5;
+}
+.isToggled .minBar {
+   position: relative;
+   border-bottom: 1px solid;
+}
+.isToggled .minBar::before {
+   content: "";
+   position: absolute;
+   right: 0;
+   bottom: 0;
+   display: inline-block;
+   background-color: #000000;
+   height: 100%;
+   width: 1px;
+   transform: scaleY(.4);
+   transform-origin: bottom;
+   transition: all .5s;
+}
+
+.isToggled .minBar:hover:before {
+   transform: scaleY(.7);
 }

@@ -17,6 +17,7 @@
    grid-area: navbar;
    position: sticky;
    top: 0;
+   z-index: 1;
 }
 
 .input-group {
@@ -43,7 +44,6 @@
    background-color: #ffffff;
    color: var(--secondary);
    box-shadow: 0 2px #f4f4f5;
-   transition: all .3s;
 }
 .isLight .input-group {
    border: 1px solid #e9e9ec;
@@ -54,6 +54,7 @@
    cursor: pointer;
 }
 .profile-card {
+   position: absolute;
    right: 0;
    top: 5.1rem;
    border-radius: 0 0 5px 5px;

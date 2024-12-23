@@ -1,12 +1,20 @@
 import { BsList } from "react-icons/bs";
-import { MdDashboard, MdPerson4, MdSettings } from "react-icons/md";
+import { MdDashboard, MdSettings } from "react-icons/md";
+import { BiUser } from "react-icons/bi";
 import styles from "./SideBar.module.css";
 import { useState } from "react";
-const SideBar = () => {
+interface Props {
+	isToggled: boolean;
+}
+const SideBar = ({ isToggled = false }: Props) => {
 	const [toggled, setToggled] = useState(false);
 	return (
 		<aside
-			className={`${[styles.sideBar, toggled && styles.toggled].join(" ")}`}
+			className={`${[
+				styles.sideBar,
+				toggled && styles.toggled,
+				isToggled && styles.isToggled,
+			].join(" ")}`}
 		>
 			<div className={`${styles.minBar} fw-bolder`}>
 				<h4 className={styles.heading}>UserHub Pro</h4>
@@ -23,7 +31,7 @@ const SideBar = () => {
 				</article>
 				<article className={`${styles.media}`}>
 					<i className={styles.mediaIcon}>
-						<MdPerson4 size={25} />
+						<BiUser size={25} />
 					</i>
 					<span className={`${styles["media-content"]}`}>Users</span>
 				</article>
