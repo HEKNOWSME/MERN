@@ -159,7 +159,13 @@ const App = () => {
 									amount={user.amount}
 									email={user.email}
 									status={user.status}
-									onSubmit={(data) => handleEditSubmit(data)}
+									onSubmit={(data) => {
+										handleEditSubmit(data);
+										setApp({ ...App, message: true, editMode: false });
+										setTimeout(() => {
+											setApp({ ...App, message: false, editMode: false });
+										}, 2000);
+									}}
 								/>
 							</div>
 						)}

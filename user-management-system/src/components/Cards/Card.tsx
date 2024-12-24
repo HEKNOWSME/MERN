@@ -18,7 +18,7 @@ const Card = ({ isToggled = false, users }: Props) => {
 					</i>
 					<p className="card-title">Total Users</p>
 				</header>
-				<div className={styles.cardBody}>{users.length}</div>
+				<div className={styles.cardBody}>{users.length} Users</div>
 			</div>
 			<div className={`card ${[styles.card, styles.two].join(" ")}`}>
 				<header className={` ${styles["card-header"]}`}>
