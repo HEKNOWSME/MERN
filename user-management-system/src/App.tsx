@@ -5,7 +5,6 @@ import Main from "./components/MainSide/Main";
 import GetUsers, { User } from "./components/Users/Users";
 import Users from "./components/Users/GetUsers";
 import AddUsers from "./components/Users/AddUsers";
-import Settings from "./components/MySettings/Settings";
 import EditUser from "./components/Users/EditUser";
 
 const App = () => {
@@ -16,9 +15,9 @@ const App = () => {
 	const [App, setApp] = useState({
 		dashBoard: true,
 		user: false,
-		settings: false,
 		add: false,
 		editMode: false,
+		message: false,
 	});
 	const [allUsers, setUsers] = useState(Users());
 	const [user, setUser] = useState<User>({
@@ -49,7 +48,10 @@ const App = () => {
 
 	const handleAdd = (user: User) => {
 		setUsers([...allUsers, { ...user, id: allUsers.length + 1 }]);
-		setApp({ ...App, editMode: false, add: true });
+		setApp({ ...App, editMode: false, add: false, message: true });
+		setTimeout(() => {
+			setApp({ ...App, message: false, add: false, editMode: false });
+		}, 2000);
 	};
 	const handleDelete = (user: User) => {
 		setUsers(allUsers.filter((u) => u.id !== user.id));
@@ -66,105 +68,148 @@ const App = () => {
 		});
 	};
 	const handleEditSubmit = (data: User) => {
-		setUsers(allUsers.map((u) => (u.id === user.id ? data : u)));
-		setApp({ ...App, editMode: false});
+		setUsers(
+			allUsers.map((u) =>
+				u.id === user.id
+					? {
+							id: user.id,
+							username: data.username,
+							email: data.email,
+							amount: data.amount,
+							status: data.status,
+					  }
+					: u
+			)
+		);
+		setApp({ ...App, editMode: false });
 	};
 	return (
-		<div className="grid">
+		<div className={`grid ${toggle && "toggle"}`}>
 			<div className="nav">
 				<Navigation
 					toUser={disabled}
 					onSearch={(data) => {
 						setSearch(data.toLowerCase());
+						setApp({ ...App, add: false });
 					}}
 					onToggle={() => {
 						setToggle(!toggle);
 					}}
 				/>
 			</div>
-			<SideBar
-				isToggled={toggle}
-				onClick={(str) => {
-					if (str === "Dashboard") {
-						setApp({
-							...App,
-							user: false,
-							settings: false,
-							dashBoard: true,
-						});
-						setDisabled(false);
-					}
-					if (str === "Users") {
-						setApp({ ...App, user: true, dashBoard: false, settings: false });
-						setDisabled(true);
-					}
-					if (str === "Settings") {
-						setApp({ ...App, settings: true, dashBoard: false, user: false });
-						setDisabled(false);
-					}
-				}}
-			/>
-			{App.dashBoard && <Main isToggled={toggle} users={allUsers} />}
+			<aside className="sidebar">
+				<SideBar
+					isToggled={toggle}
+					onClick={(str) => {
+						if (str === "Dashboard") {
+							setApp({
+								...App,
+								user: false,
+								dashBoard: true,
+							});
+							setDisabled(false);
+						} else {
+							setApp({ ...App, user: true, dashBoard: false });
+							setDisabled(true);
+						}
+					}}
+				/>
+			</aside>
+			<main className="main">
+				{App.dashBoard && <Main isToggled={toggle} users={allUsers} />}
 
-			{App.user && (
-				<div className={toggle ? "toggled" : "users"}>
-					<div className="d-flex justify-content-end">
-						<button
-							type="button"
-							className="btn btn-primary mb-3"
-							onClick={() => setApp({ ...App, add: !App.add, editMode: false })}
-						>
-							Add User
-						</button>
-					</div>
-					{App.add && (
-						<div className={`AddUsers ${toggle && "card"}`}>
-							<AddUsers onAdd={handleAdd} />
+				{App.user && (
+					<div className={toggle ? "toggled" : "users"}>
+						<div className="d-flex justify-content-end">
+							<button
+								type="button"
+								className="btn btn-primary mb-3"
+								onClick={() =>
+									setApp({ ...App, add: !App.add, editMode: false })
+								}
+							>
+								Add User
+							</button>
 						</div>
-					)}
-					{App.editMode && (
-						<div className={`AddUsers ${toggle && "card"}`}>
-							<EditUser
-								username={user.username}
-								amount={user.amount}
-								email={user.email}
-								status={user.status}
-								onSubmit={(data) => handleEditSubmit(data)}
-							/>
+						{App.add && (
+							<div className={`AddUsers ${toggle && "cards"}`}>
+								<div className="d-flex justify-content-end">
+									<button
+										type="button"
+										className="btn-close mx-2 bg-white"
+										aria-label="btn-close"
+										onClick={() => setApp({ ...App, add: false })}
+									></button>
+								</div>
+								<AddUsers onAdd={handleAdd} />
+							</div>
+						)}
+						{App.editMode && (
+							<div className={`AddUsers ${toggle && "cards"}`}>
+								<div className="d-flex justify-content-end">
+									<button
+										type="button"
+										className="btn-close mx-2 bg-white"
+										aria-label="btn-close"
+										onClick={() => setApp({ ...App, editMode: false })}
+									></button>
+								</div>
+								<EditUser
+									username={user.username}
+									amount={user.amount}
+									email={user.email}
+									status={user.status}
+									onSubmit={(data) => handleEditSubmit(data)}
+								/>
+							</div>
+						)}
+						<GetUsers
+							users={filtered}
+							toggled={!toggle}
+							onDelete={handleDelete}
+							onEdit={handleEdit}
+						/>
+						{allUsers.length == 0 && (
+							<h2 className="message text-center text-secondary">
+								No User Available
+							</h2>
+						)}
+						<div
+							className={`flex ${allUsers.length == 0 && "visually-hidden"}`}
+						>
+							<button
+								type="button"
+								className="btn btn-primary"
+								onClick={prevPage}
+								disabled={currentPage == 1}
+							>
+								Prev
+							</button>
+							<button
+								type="button"
+								className="btn btn-primary mx-4"
+								onClick={nextPage}
+								disabled={currentPage == numberOfPages}
+							>
+								Next
+							</button>
 						</div>
-					)}
-					<GetUsers
-						users={filtered}
-						toggled={!toggle}
-						onDelete={handleDelete}
-						onEdit={handleEdit}
-					/>
-					{allUsers.length == 0 && (
-						<h2 className="message text-center text-secondary">
-							No User Available
-						</h2>
-					)}
-					<div className={`flex ${allUsers.length == 0 && "visually-hidden"}`}>
-						<button
-							type="button"
-							className="btn btn-primary"
-							onClick={prevPage}
-							disabled={currentPage == 1}
-						>
-							Prev
-						</button>
-						<button
-							type="button"
-							className="btn btn-primary mx-4"
-							onClick={nextPage}
-							disabled={currentPage == numberOfPages}
-						>
-							Next
-						</button>
+						<div className="d-flex justify-content-end">
+							{App.message && (
+								<div className="alert alert-primary w-25 d-flex justify-content-between">
+									<span>Successful Added</span>
+									<button
+										type="button"
+										className="btn btn-close"
+										aria-label="btn"
+										onClick={() => setApp({ ...App, message: false })}
+									></button>
+								</div>
+							)}
+						</div>
 					</div>
-				</div>
-			)}
-			{App.settings && <Settings />}
+				)}
+			</main>
 		</div>
 	);
 };

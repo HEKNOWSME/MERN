@@ -1,4 +1,4 @@
-import { LuUsers, LuList, LuLayoutDashboard, LuSettings } from "react-icons/lu";
+import { LuUsers, LuList, LuLayoutDashboard } from "react-icons/lu";
 import styles from "./SideBar.module.css";
 import { useState } from "react";
 interface Props {
@@ -21,7 +21,7 @@ const SideBar = ({ isToggled = false, onClick }: Props) => {
 					<LuList size={35} />
 				</i>
 			</div>
-			<section className={`${styles.main}`}>
+			<section>
 				<article
 					className={`${styles.media}`}
 					onClick={() => onClick("Dashboard")}
@@ -36,15 +36,6 @@ const SideBar = ({ isToggled = false, onClick }: Props) => {
 						<LuUsers size={25} />
 					</i>
 					<span className={`${styles["media-content"]}`}>Users</span>
-				</article>
-				<article
-					className={`${styles.media}`}
-					onClick={() => onClick("Settings")}
-				>
-					<i className={styles.mediaIcon}>
-						<LuSettings size={25} />
-					</i>
-					<span className={`${styles["media-content"]}`}>Settings</span>
 				</article>
 			</section>
 		</aside>

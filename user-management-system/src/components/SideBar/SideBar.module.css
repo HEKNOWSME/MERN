@@ -1,3 +1,8 @@
+* {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+}
 :root {
 	--accent: #20232A;
     --primary: #5ccceb;
@@ -7,19 +12,13 @@
 }
 
 .sideBar {
-   box-sizing: border-box;
    height: 100vh;
    position: sticky;
    top: 0;
-   left: 0;
-   grid-area: sidebar;
    background-color: var(--secondary);
    color: var(--text-primary);
-   width: 180px;
-   align-self: self-start;
 }
 .minBar {
-   height: 11%;
    border-bottom: 1px solid #fff;
    display: flex;
    align-items: center ;
@@ -29,9 +28,6 @@
 .heading {
    font-size: 1.2rem;
    display: block;
-}
-.main {
-   height: 89%;
 }
 .media {
    display: flex;

@@ -18,7 +18,7 @@ const AddUsers = ({ onAdd }: Props) => {
 				reset();
 			})}
 		>
-			<h3 className="text-center">Please Add new User</h3>
+			<h3 className="text-center m-0">Please Add new User</h3>
 			<div className="mb-3">
 				<label htmlFor="username" className="form-label">
 					Username
@@ -66,6 +66,7 @@ const AddUsers = ({ onAdd }: Props) => {
 						required: "Field required",
 						valueAsNumber: true,
 						min: { value: 1, message: "Amount should be above $1" },
+						max: { value: 10_000, message: "Do not exceed $10,000" },
 					})}
 					type="number"
 					name="amount"

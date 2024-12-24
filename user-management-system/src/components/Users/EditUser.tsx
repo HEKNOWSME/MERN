@@ -31,7 +31,7 @@ const EditUser = ({ username, email, amount, status, onSubmit }: Props) => {
 				reset();
 			})}
 		>
-			<h3 className="text-center">Please Edit User</h3>
+         <h3 className="text-center">Please Edit { username}</h3>
 			<div className="mb-3">
 				<label htmlFor="username" className="form-label">
 					Username
@@ -47,7 +47,7 @@ const EditUser = ({ username, email, amount, status, onSubmit }: Props) => {
 					type="text"
 					name="username"
 					id="username"
-					className="form-control"
+					className="form-control "
 					autoComplete="username"
 					value={user.username}
 					onChange={(e) => setUser({ ...user, username: e.target.value })}
@@ -83,6 +83,7 @@ const EditUser = ({ username, email, amount, status, onSubmit }: Props) => {
 						required: "Field required",
 						valueAsNumber: true,
 						min: { value: 1, message: "Amount should be above $1" },
+						max: { value: 10_000, message: "Do not exceed $10,000" },
 					})}
 					type="number"
 					name="amount"

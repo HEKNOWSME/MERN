@@ -1,36 +1,72 @@
-.grid {
-   width: 100%;
-   min-height: 100vh;
-   min-height: 100dvh;
-   display: grid;
-   grid-template-columns: max-content 1fr;
-   grid-template-areas: 
-   "sidebar navbar"
-   "sidebar main"
-   "sidebar main"
-   ;
-   grid-template-rows: auto 1fr;
-   
+* {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
 }
+.grid {
+   width: 100vw;
+   min-height: 100vh;
+   display: grid;
+   grid-template-columns: auto 1fr;
+   grid-template-rows: auto 1fr;
+   justify-items: stretch;
+   align-items: stretch;
+   background-color: #20232A;
+}
+
 .users {
-   grid-area: main;
    padding: .7rem;
    z-index: 0;
    background-color: #20232A;
 }
 .toggled {
-   grid-area: main;
    padding: .7rem;
    background-color: #fff;
    color: #282C34;
    box-shadow: 2px 2px 2px 2px #eae5e5 inset;
 }
-
+.toggle {
+   background-color: #fff;
+   color: #282C34;
+   box-shadow: 2px 2px 2px 2px #eae5e5 inset;
+}
+.nav {
+   top: 0;
+  position: sticky;
+  grid-column: 2 /3 ;
+  grid-row: 1/2;
+  z-index: 1;
+}
+.sidebar {
+   grid-column: 1 /2;
+   grid-row: 1 / 3;
+   top: 0;
+   position: sticky;
+   align-self: start;
+   height: 100vh;
+   
+}
+.main {
+   grid-column: 2 / 3;
+   grid-row: 2 /3;
+   z-index: 0;
+   position: relative;
+   
+}
 .AddUsers {
    background-color: #282c34;
-   margin: 2rem;
    padding: 1rem;
    color: #E6E6E6;
-   border: 1px solid #2d2f34;
+   border: 1px solid #6e7381;
    border-radius: 5px;
+   position: absolute;
+   top: .4rem;
+   right: 25%;
+   opacity: .8;
+}
+
+.cards {
+   background-color: #fff;
+   color: #282C34;
+   opacity: .9;
 }
