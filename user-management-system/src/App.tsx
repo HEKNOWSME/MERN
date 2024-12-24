@@ -67,7 +67,7 @@ const App = () => {
 					}
 				}}
 			/>
-			{App.dashBoard && <Main isToggled={toggle} />}
+			{App.dashBoard && <Main isToggled={toggle} users={allUsers} />}
 
 			{App.user && (
 				<div className={toggle ? "toggled" : "users"}>

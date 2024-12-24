@@ -1,5 +1,5 @@
 import styles from "./Users.module.css";
-interface User {
+export interface User {
 	id: number;
 	username: string;
 	email: string;
