@@ -7,13 +7,16 @@
 }
 
 .sideBar {
+   box-sizing: border-box;
+   height: 100vh;
    position: sticky;
    top: 0;
-   height: 100vh;
+   left: 0;
    grid-area: sidebar;
    background-color: var(--secondary);
    color: var(--text-primary);
    width: 180px;
+   align-self: self-start;
 }
 .minBar {
    height: 11%;

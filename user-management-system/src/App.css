@@ -1,6 +1,7 @@
 .grid {
    width: 100%;
    min-height: 100vh;
+   min-height: 100dvh;
    display: grid;
    grid-template-columns: max-content 1fr;
    grid-template-areas: 
@@ -9,7 +10,6 @@
    "sidebar main"
    ;
    grid-template-rows: auto 1fr;
-   position: relative;
    
 }
 .users {
@@ -20,9 +20,17 @@
 }
 .toggled {
    grid-area: main;
-   z-index: 0;
    padding: .7rem;
    background-color: #fff;
    color: #282C34;
    box-shadow: 2px 2px 2px 2px #eae5e5 inset;
+}
+
+.AddUsers {
+   background-color: #282c34;
+   margin: 2rem;
+   padding: 1rem;
+   color: #E6E6E6;
+   border: 1px solid #2d2f34;
+   border-radius: 5px;
 }

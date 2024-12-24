@@ -2,9 +2,11 @@ import { useState } from "react";
 import Navigation from "./components/Navigation/Navigation";
 import SideBar from "./components/SideBar/SideBar";
 import Main from "./components/MainSide/Main";
-import Settings from "./components/MySettings/Settings";
-import GetUsers from "./components/Users/Users";
+import GetUsers, { User } from "./components/Users/Users";
 import Users from "./components/Users/GetUsers";
+import AddUsers from "./components/Users/AddUsers";
+import Settings from "./components/MySettings/Settings";
+import EditUser from "./components/Users/EditUser";
 
 const App = () => {
 	const [toggle, setToggle] = useState(false);
@@ -15,8 +17,18 @@ const App = () => {
 		dashBoard: true,
 		user: false,
 		settings: false,
+		add: false,
+		editMode: false,
 	});
-	const [allUsers] = useState(Users());
+	const [allUsers, setUsers] = useState(Users());
+	const [user, setUser] = useState<User>({
+		id: 0,
+		username: "",
+		amount: 0,
+		email: "",
+		status: "",
+	});
+
 	let filtered = allUsers.filter(
 		(user) =>
 			user.username.toLowerCase().includes(searchItem) ||
@@ -35,22 +47,47 @@ const App = () => {
 
 	const prevPage = () => currentPage > 1 && setPage(currentPage - 1);
 
+	const handleAdd = (user: User) => {
+		setUsers([...allUsers, { ...user, id: allUsers.length + 1 }]);
+		setApp({ ...App, editMode: false, add: true });
+	};
+	const handleDelete = (user: User) => {
+		setUsers(allUsers.filter((u) => u.id !== user.id));
+	};
+
+	const handleEdit = (user: User) => {
+		setApp({ ...App, editMode: true, add: false });
+		setUser({
+			id: user.id,
+			username: user.username,
+			amount: user.amount,
+			email: user.email,
+			status: user.status,
+		});
+	};
+	const handleEditSubmit = (data: User) => {
+		setUsers(allUsers.map((u) => (u.id === user.id ? data : u)));
+		setApp({ ...App, editMode: false});
+	};
 	return (
 		<div className="grid">
-			<Navigation
-				toUser={disabled}
-				onSearch={(data) => {
-					setSearch(data.toLowerCase());
-				}}
-				onToggle={() => {
-					setToggle(!toggle);
-				}}
-			/>
+			<div className="nav">
+				<Navigation
+					toUser={disabled}
+					onSearch={(data) => {
+						setSearch(data.toLowerCase());
+					}}
+					onToggle={() => {
+						setToggle(!toggle);
+					}}
+				/>
+			</div>
 			<SideBar
 				isToggled={toggle}
 				onClick={(str) => {
 					if (str === "Dashboard") {
 						setApp({
+							...App,
 							user: false,
 							settings: false,
 							dashBoard: true,
@@ -58,11 +95,11 @@ const App = () => {
 						setDisabled(false);
 					}
 					if (str === "Users") {
-						setApp({ user: true, dashBoard: false, settings: false });
+						setApp({ ...App, user: true, dashBoard: false, settings: false });
 						setDisabled(true);
 					}
 					if (str === "Settings") {
-						setApp({ settings: true, dashBoard: false, user: false });
+						setApp({ ...App, settings: true, dashBoard: false, user: false });
 						setDisabled(false);
 					}
 				}}
@@ -72,12 +109,42 @@ const App = () => {
 			{App.user && (
 				<div className={toggle ? "toggled" : "users"}>
 					<div className="d-flex justify-content-end">
-						<button type="button" className="btn btn-primary mb-3">
+						<button
+							type="button"
+							className="btn btn-primary mb-3"
+							onClick={() => setApp({ ...App, add: !App.add, editMode: false })}
+						>
 							Add User
 						</button>
 					</div>
-					<GetUsers users={filtered} toggled={!toggle} />
-					<div className={`flex ${filtered.length == 0 && "visually-hidden"}`}>
+					{App.add && (
+						<div className={`AddUsers ${toggle && "card"}`}>
+							<AddUsers onAdd={handleAdd} />
+						</div>
+					)}
+					{App.editMode && (
+						<div className={`AddUsers ${toggle && "card"}`}>
+							<EditUser
+								username={user.username}
+								amount={user.amount}
+								email={user.email}
+								status={user.status}
+								onSubmit={(data) => handleEditSubmit(data)}
+							/>
+						</div>
+					)}
+					<GetUsers
+						users={filtered}
+						toggled={!toggle}
+						onDelete={handleDelete}
+						onEdit={handleEdit}
+					/>
+					{allUsers.length == 0 && (
+						<h2 className="message text-center text-secondary">
+							No User Available
+						</h2>
+					)}
+					<div className={`flex ${allUsers.length == 0 && "visually-hidden"}`}>
 						<button
 							type="button"
 							className="btn btn-primary"
