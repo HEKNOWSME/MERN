@@ -115,7 +115,7 @@ const App = () => {
 					}}
 				/>
 			</aside>
-			<main className="main">
+			<main className={`main ${toggle && "toggle"}`}>
 				{App.dashBoard && <Main isToggled={toggle} users={allUsers} />}
 
 				{App.user && (
