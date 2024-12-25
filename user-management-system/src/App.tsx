@@ -203,7 +203,7 @@ const App = () => {
 						<div className="d-flex justify-content-end">
 							{App.message && (
 								<div className="alert alert-primary w-25 d-flex justify-content-between">
-									<span>Successful Added</span>
+									<span>Successful {!App.editMode ? "Edited" : "Added"}</span>
 									<button
 										type="button"
 										className="btn btn-close"

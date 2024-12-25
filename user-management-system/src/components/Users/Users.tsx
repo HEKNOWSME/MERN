@@ -14,7 +14,7 @@ interface Props {
 }
 const GetUsers = ({ users, toggled = false, onDelete, onEdit }: Props) => {
 	return (
-		<div>
+		<div className= {styles.main}>
 			<table
 				className={`table table-bordered  ${styles.toggled} ${
 					toggled && "table-dark"

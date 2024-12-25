@@ -31,7 +31,7 @@ const EditUser = ({ username, email, amount, status, onSubmit }: Props) => {
 				reset();
 			})}
 		>
-         <h3 className="text-center">Please Edit { username}</h3>
+			<h3 className="text-center">Please Edit {username}</h3>
 			<div className="mb-3">
 				<label htmlFor="username" className="form-label">
 					Username
@@ -108,7 +108,7 @@ const EditUser = ({ username, email, amount, status, onSubmit }: Props) => {
 					name="status"
 					aria-label="status"
 					className="form-select"
-					value={status}
+					value={user.status}
 					onChange={(e) => setUser({ ...user, status: e.target.value })}
 				>
 					<option value=""></option>
