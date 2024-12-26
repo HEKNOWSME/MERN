@@ -1,4 +1,5 @@
-import styles from "./movies.module.css"
+import styles from "./movies.module.css";
+import Like from "../Like/Like";
 interface Movie {
 	_id: string;
 	title: string;
@@ -8,38 +9,51 @@ interface Movie {
 }
 interface Props {
 	items: Movie[];
+	onDelete: (id: string) => void;
 }
-const AllTable = ({ items }: Props) => {
+const AllTable = ({ items, onDelete }: Props) => {
+	if (items.length === 0)
+		return <h3 className="text-center">No Available movie</h3>;
 	return (
-		<table className="table table-bordered table-dark">
-			<thead>
-				<tr>
-					<th scope="col">Title</th>
-					<th scope="col">Genre</th>
-					<th scope="col">Stock</th>
-					<th scope="col">Rate</th>
-					<th scope="col">Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				{items.map((item) => (
-					<tr key={item._id}>
-						<td>{item.title}</td>
-						<td>{item.genre.name}</td>
-						<td>{item.numberInStock}</td>
-						<td>{item.dailyRentalRate}</td>
-						<td className= {`${styles["btn-flex"]}`}>
-							<button type="button" className="btn btn-outline-primary">
-								Delete
-							</button>
-							<button type="button" className="btn btn-outline-danger">
-								Edit
-							</button>
-						</td>
+		<div className="w-100">
+			<h4 className="text-center">
+				Showing {items.length} Movies in The database
+			</h4>
+			<table className="table table-bordered table-dark">
+				<thead>
+					<tr>
+						<th scope="col">Title</th>
+						<th scope="col">Genre</th>
+						<th scope="col">Stock</th>
+						<th scope="col">Rate</th>
+						<th scope="col">Action</th>
 					</tr>
-				))}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{items.map((item) => (
+						<tr key={item._id}>
+							<td>{item.title}</td>
+							<td>{item.genre.name}</td>
+							<td>{item.numberInStock}</td>
+							<td>{item.dailyRentalRate}</td>
+							<td className={`${styles["btn-flex"]}`}>
+								<Like/>
+								<button
+									type="button"
+									className="btn btn-outline-primary"
+									onClick={() => onDelete(item._id)}
+								>
+									Delete
+								</button>
+								<button type="button" className="btn btn-outline-danger">
+									Edit
+								</button>
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
 	);
 };
 
