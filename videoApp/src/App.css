@@ -51,6 +51,6 @@
    text-align: center;
 }
 
-.main , .side-bar, .nav-bar, .footer {
+.main ,  .nav-bar, .footer {
    padding: 1rem .5rem;
 }

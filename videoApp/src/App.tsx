@@ -1,16 +1,21 @@
 import { useState } from "react";
 import AllTable from "./components/Movies/AllMovies";
 import movies from "./services/fakeMovieService";
+import Genres from "./components/Genres/Genres";
 const App = () => {
 	const [allMovies, setMovies] = useState(movies);
+	const [selected, setSelected] = useState("");
 	const [messages, setMessage] = useState({
 		deleted: false,
 		edited: false,
 		added: false,
 	});
-	let filteredMovies = allMovies.filter((movie) => movie);
+	let filteredMovies = [...allMovies];
+	filteredMovies = allMovies.filter((movie) => movie.genre.name == selected);
+	if (filteredMovies.length === 0) filteredMovies = allMovies;
+
 	const handleDelete = (id: string) => {
-		filteredMovies = filteredMovies.filter((movie) => movie._id !== id);
+		filteredMovies = allMovies.filter((movie) => movie._id !== id);
 		setMovies(filteredMovies);
 		setMessage({ ...messages, deleted: true });
 		setTimeout(() => {
@@ -19,7 +24,9 @@ const App = () => {
 	};
 	return (
 		<div className="grid">
-			<aside className="side-bar">box side</aside>
+			<aside className="side-bar">
+				<Genres onFiltered={(name) => setSelected(name)} />
+			</aside>
 			<nav className="nav-bar">box nav</nav>
 			<main className="main">
 				{messages.deleted && (

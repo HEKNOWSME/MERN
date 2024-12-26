@@ -1,0 +1,22 @@
+.minSide{
+   padding: .5rem;
+   display: flex;
+   gap: 1rem;
+   justify-content: center;
+   align-items: center;
+}
+
+.heading {
+   margin-top: 0;
+}
+.icon {
+   cursor: pointer;
+}
+.listItem {
+   cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+   .heading {
+      display: none;
+   }
+}
