@@ -15,8 +15,14 @@
 .listItem {
    cursor: pointer;
 }
+.toggle {
+   display: none;
+}
 @media screen and (max-width: 768px) {
    .heading {
+      display: none;
+   }
+   .listItems {
       display: none;
    }
 }

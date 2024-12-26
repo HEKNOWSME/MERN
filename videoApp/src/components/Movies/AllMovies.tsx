@@ -16,9 +16,6 @@ const AllTable = ({ items, onDelete }: Props) => {
 		return <h3 className="text-center">No Available movie</h3>;
 	return (
 		<div className="w-100">
-			<h4 className="text-center">
-				Showing {items.length} Movies in The database
-			</h4>
 			<table className="table table-bordered table-dark">
 				<thead>
 					<tr>
