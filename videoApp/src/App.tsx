@@ -32,7 +32,10 @@ const App = () => {
 				{messages.deleted && (
 					<span className="alert alert-primary">user deleted</span>
 				)}
-				<AllTable items={filteredMovies} onDelete={handleDelete} />
+				<AllTable
+					items={filteredMovies.sort((a, b) => a.title.localeCompare(b.title))}
+					onDelete={handleDelete}
+				/>
 			</main>
 			<footer className="footer">Footer</footer>
 		</div>
