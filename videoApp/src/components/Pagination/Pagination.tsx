@@ -20,7 +20,7 @@ const Pagination = ({
 			<ul className="pagination gap-1">
 				{pageNumbers.map((page) => (
 					<li
-						key={pages}
+						key={page}
 						className={page === currentPage ? "page-item active" : "page-item"}
 					>
 						<a className="page-link" onClick={() => onChangePage(page)}>
