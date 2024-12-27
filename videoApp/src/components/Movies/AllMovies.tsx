@@ -1,6 +1,6 @@
 import styles from "./movies.module.css";
 import Like from "../Like/Like";
-interface Movie {
+export interface Movie {
 	_id: string;
 	title: string;
 	genre: { _id: string; name: string };
