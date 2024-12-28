@@ -26,7 +26,7 @@ const App = () => {
 	const filtered = selected
 		? allMovies.filter((movie) => movie.genre.name === selected)
 		: allMovies;
-	const NewMovies = paginate(filtered, currentPage, 4);
+	const NewMovies = paginate(filtered, currentPage, 5);
 	return (
 		<div className="grid">
 			<aside className="side-bar">
@@ -43,9 +43,6 @@ const App = () => {
 					<span className="alert alert-primary">Successful deleted</span>
 				)}
 				<div className="movies">
-					<h4 className="text-center">
-						Showing {allMovies.length} Movies in The database
-					</h4>
 					<AllTable
 						items={NewMovies.sort((a, b) => a.title.localeCompare(b.title))}
 						onDelete={handleDelete}

@@ -6,18 +6,20 @@ import GetUsers, { User } from "./components/Users/Users";
 import Users from "./components/Users/GetUsers";
 import AddUsers from "./components/Users/AddUsers";
 import EditUser from "./components/Users/EditUser";
+import Filter from "./components/Filter/Filter";
+import Pagination from "./components/Pagination/Pagination";
+import { Paginate } from "./components/Pagination/Paginate";
 
 const App = () => {
 	const [toggle, setToggle] = useState(false);
 	const [disabled, setDisabled] = useState(false);
-	const [searchItem, setSearch] = useState("");
-	const [currentPage, setPage] = useState(1);
 	const [App, setApp] = useState({
 		dashBoard: true,
 		user: false,
 		add: false,
 		editMode: false,
 		message: false,
+		currentPage: 1,
 	});
 	const [allUsers, setUsers] = useState(Users());
 	const [user, setUser] = useState<User>({
@@ -27,25 +29,18 @@ const App = () => {
 		email: "",
 		status: "",
 	});
+	const [filter, setFilter] = useState({ selected: "", searched: "" });
 
-	let filtered = allUsers.filter(
-		(user) =>
-			user.username.toLowerCase().includes(searchItem) ||
-			user.email.toLowerCase().includes(searchItem)
-	);
-	if (filtered.length === 0) filtered = [];
-
-	const usersPerPage = 5;
-	const numberOfPages = Math.ceil(filtered.length / usersPerPage);
-	const startUser = (currentPage - 1) * usersPerPage;
-	const endUser = startUser + usersPerPage;
-	filtered = filtered.slice(startUser, endUser);
-
-	const nextPage = () =>
-		currentPage < numberOfPages && setPage(currentPage + 1);
-
-	const prevPage = () => currentPage > 1 && setPage(currentPage - 1);
-
+	const filtered = allUsers.filter((user) => {
+		const selectedUsers =
+			!filter.selected ||
+			user.status.toLowerCase() == filter.selected.toLowerCase();
+		const searchedUsers =
+			user.username.toLowerCase().includes(filter.searched) ||
+			user.email.toLowerCase().includes(filter.searched);
+		return selectedUsers && searchedUsers;
+	});
+	const paginated = Paginate(filtered, App.currentPage, 5);
 	const handleAdd = (user: User) => {
 		setUsers([...allUsers, { ...user, id: allUsers.length + 1 }]);
 		setApp({ ...App, editMode: false, add: false, message: true });
@@ -88,9 +83,9 @@ const App = () => {
 			<div className="nav">
 				<Navigation
 					toUser={disabled}
-					onSearch={(data) => {
-						setSearch(data.toLowerCase());
-						setApp({ ...App, add: false });
+					onSearch={(e) => {
+						setApp({ ...App, add: false, currentPage: 1 });
+						setFilter({ ...filter, searched: e });
 					}}
 					onToggle={() => {
 						setToggle(!toggle);
@@ -169,37 +164,30 @@ const App = () => {
 								/>
 							</div>
 						)}
+						<div className="w-25 d-flex mb-2">
+							<Filter
+								onChange={(e) => {
+									setFilter({ ...filter, selected: e });
+									setApp({ ...App, currentPage: 1 });
+								}}
+							/>
+						</div>
 						<GetUsers
-							users={filtered}
+							users={paginated}
 							toggled={!toggle}
 							onDelete={handleDelete}
 							onEdit={handleEdit}
+						/>
+						<Pagination
+							items={filtered}
+							currentPage={App.currentPage}
+							OnPage={(page) => setApp({ ...App, currentPage: page })}
 						/>
 						{allUsers.length == 0 && (
 							<h2 className="message text-center text-secondary">
 								No User Available
 							</h2>
 						)}
-						<div
-							className={`flex ${allUsers.length == 0 && "visually-hidden"}`}
-						>
-							<button
-								type="button"
-								className="btn btn-primary"
-								onClick={prevPage}
-								disabled={currentPage == 1}
-							>
-								Prev
-							</button>
-							<button
-								type="button"
-								className="btn btn-primary mx-4"
-								onClick={nextPage}
-								disabled={currentPage == numberOfPages}
-							>
-								Next
-							</button>
-						</div>
 						<div className="d-flex justify-content-end">
 							{App.message && (
 								<div className="alert alert-primary w-25 d-flex justify-content-between">

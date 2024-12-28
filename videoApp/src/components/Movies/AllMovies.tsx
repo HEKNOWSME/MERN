@@ -34,7 +34,7 @@ const AllTable = ({ items, onDelete }: Props) => {
 							<td>{item.numberInStock}</td>
 							<td>{item.dailyRentalRate}</td>
 							<td className={`${styles["btn-flex"]}`}>
-								<Like/>
+								<Like />
 								<button
 									type="button"
 									className="btn btn-outline-primary"
