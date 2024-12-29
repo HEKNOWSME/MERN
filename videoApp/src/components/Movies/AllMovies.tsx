@@ -1,5 +1,6 @@
 import styles from "./movies.module.css";
 import Like from "../Like/Like";
+import { NavLink } from "react-router-dom";
 export interface Movie {
 	_id: string;
 	title: string;
@@ -29,7 +30,11 @@ const AllTable = ({ items, onDelete }: Props) => {
 				<tbody>
 					{items.map((item) => (
 						<tr key={item._id}>
-							<td>{item.title}</td>
+							<td>
+								<NavLink to={`/movies/${item._id}/${item.title}`}>
+									{item.title}
+								</NavLink>
+							</td>
 							<td>{item.genre.name}</td>
 							<td>{item.numberInStock}</td>
 							<td>{item.dailyRentalRate}</td>
