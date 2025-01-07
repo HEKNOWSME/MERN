@@ -1,0 +1,34 @@
+.navigation {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+.hamburger {
+   display: none;
+}
+@media screen and (max-width: 765px) {
+   .hamburger {
+      display: block;
+      cursor: pointer;
+   }
+   .menu {
+      width: 100%;
+   }
+   .navigation {
+      flex-wrap: wrap;
+      align-items: start;
+   }
+   .nav {
+      flex-direction: column;
+      max-height: 0;
+      opacity: 0;  
+   }
+}
+.nav-link:active, .nav-link:hover {
+   background-color: rgb(134, 119, 119);
+}
+.toggle .nav {
+   max-height: 100%;
+   opacity: 1;
+   
+}

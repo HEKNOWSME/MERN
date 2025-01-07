@@ -1,0 +1,15 @@
+.img {
+   width: 45px;
+   height: 45px;
+   border-radius: 100%;
+}
+.myCard {
+   width: 10rem;
+   border-radius: 5px;
+   margin: 1rem;
+   background-color: rgba(235, 255, 355, .9);
+}
+.myCard:hover {
+   background-color: rgba(235, 235, 355, .9);
+   cursor: pointer;
+}
