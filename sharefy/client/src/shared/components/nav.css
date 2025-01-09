@@ -24,9 +24,6 @@
       opacity: 0;  
    }
 }
-.nav-link:active, .nav-link:hover {
-   background-color: rgb(134, 119, 119);
-}
 .toggle .nav {
    max-height: 100%;
    opacity: 1;
