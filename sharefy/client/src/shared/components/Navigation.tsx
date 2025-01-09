@@ -1,10 +1,11 @@
 import { LuMenu } from "react-icons/lu";
 import "./nav.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useState } from "react";
 
 const Navigation = () => {
 	const [toggle, setToggle] = useState(false);
+	const { userid } = useParams();
 
 	return (
 		<header
@@ -32,7 +33,7 @@ const Navigation = () => {
 					</li>
 					<li>
 						<NavLink
-							to="/users/id/places"
+							to="/u1/places"
 							className={({ isActive }: { isActive: boolean }) =>
 								`nav-link ${
 									isActive ? "bg-primary card text-light" : "text-light"
@@ -44,7 +45,7 @@ const Navigation = () => {
 					</li>
 					<li>
 						<NavLink
-							to="/places/new"
+							to={`/${userid}/newPlace`}
 							className={({ isActive }: { isActive: boolean }) =>
 								`nav-link ${
 									isActive ? "bg-primary card text-light" : "text-light"

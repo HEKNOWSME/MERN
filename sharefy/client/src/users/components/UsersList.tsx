@@ -14,7 +14,9 @@ const UsersList = ({ users }: { users: User[] }) => {
 					>
 						<img src={user.image} className="img" alt="user" />
 						<div>
-							<Link className="nav-link" to={`/users/${user.id}`}>{user.name}</Link>
+							<Link className="nav-link" to={`/u${user.id}/places`}>
+								{user.name}
+							</Link>
 							<span>
 								{user.places} {user.places > 1 ? "Places" : "Place"}
 							</span>

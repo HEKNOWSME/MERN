@@ -1,9 +1,60 @@
-const Places = () => {
-  return (
-     <div>
-        <h3>Places Page</h3>
-    </div>
-  )
-}
+import { useState } from "react";
+import { PlacesList } from "../components/PlacesList";
+import { useParams } from "react-router-dom";
 
-export default Places
+type Location = {
+	longitude: string;
+	latitude: string;
+};
+export interface Place {
+	id: string;
+	title: string;
+	description: string;
+	imageUrl: string;
+	address: string;
+	location: Location;
+	creator: string;
+}
+const Places = () => {
+	const [places] = useState<Place[]>([
+		{
+			title: "Empire State Building",
+			id: "p1",
+			address: "20 W 34th St., New York, NY 10001, United States",
+			description: "One of the most famous sky scrapper in the world",
+			imageUrl:
+				"https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcTrezj-EjFrSWCIy5zai3bGljtoRrmHXbTtAJfpS7T5awhDsET3ziTAhO8f5d72LtNIzeVXqoZbELj3ijK1PtLeFPBUGcQ5Hz3UlXvZqA",
+			creator: "u1",
+			location: { latitude: "40.7484405", longitude: "-73.9882393" },
+		},
+		{
+			title: "Empire State Building",
+			id: "p3",
+			address: "20 W 34th St., New York, NY 10001, United States",
+			description: "One of the most famous sky scrapper in the world",
+			imageUrl:
+				"https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcTrezj-EjFrSWCIy5zai3bGljtoRrmHXbTtAJfpS7T5awhDsET3ziTAhO8f5d72LtNIzeVXqoZbELj3ijK1PtLeFPBUGcQ5Hz3UlXvZqA",
+			creator: "u1",
+			location: { latitude: "40.7484405", longitude: "-73.9882393" },
+		},
+		{
+			title: "Empire State Building",
+			id: "p2",
+			address: "20 W 34th St., New York, NY 10001, United States",
+			description: "One of the most famous sky scrapper in the world",
+			imageUrl:
+				"https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcTrezj-EjFrSWCIy5zai3bGljtoRrmHXbTtAJfpS7T5awhDsET3ziTAhO8f5d72LtNIzeVXqoZbELj3ijK1PtLeFPBUGcQ5Hz3UlXvZqA",
+			creator: "u2",
+			location: { latitude: "40.7484405", longitude: "-73.9882393" },
+		},
+	]);
+	const { userid } = useParams();
+	const filteredPlaces = places.filter((place) => place.creator === userid);
+	return (
+		<div className="p-2">
+			<PlacesList places={filteredPlaces} />
+		</div>
+	);
+};
+
+export default Places;
