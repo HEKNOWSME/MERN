@@ -7,7 +7,7 @@ interface Props {
 }
 const PopUp = ({ placeTitle, imageUrl, onClose, description }: Props) => {
 	return (
-		<div className="card position-absolute top-50 start-50 translate-middle w-50 bg-body-secondary">
+		<div className="card position-fixed top-50 start-50 translate-middle bg-body-secondary">
 			<div className="card-header text-center d-flex justify-content-between">
 				<span>{placeTitle}</span>
 				<button

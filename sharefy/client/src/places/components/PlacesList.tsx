@@ -44,7 +44,7 @@ export const PlacesList = ({ places }: { places: Place[] }) => {
 						/>
 						<div className="card-body">
 							<p> {place.title}</p>
-							<p> {place.address}</p>
+							<span> {place.address}</span>
 							<span> {place.description}</span>
 						</div>
 						<div className="card-footer d-flex gap-2 justify-content-center">

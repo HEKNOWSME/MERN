@@ -9,7 +9,7 @@ const Navigation = () => {
 
 	return (
 		<header
-			className={`bg-secondary text-light p-2 navigation ${toggle && "toggle"}`}
+			className={`bg-secondary text-light p-2 navigation ${toggle && "toggle"} position-sticky top-0 start-0 end-0 z-1`}
 		>
 			<div className="d-flex gap-2 menu">
 				<i className="hamburger" onClick={() => setToggle(!toggle)}>
