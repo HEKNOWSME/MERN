@@ -16,12 +16,15 @@ export interface Place {
 	creator: string;
 }
 const Places = () => {
-	const [places] = useState<Place[]>(DUMMY_PLACES);
+	const [places, setPlaces] = useState<Place[]>(DUMMY_PLACES);
 	const { userid } = useParams();
 	const filteredPlaces = places.filter((place) => place.creator === userid);
+	const handleDelete = (place: Place) => {
+		setPlaces(places.filter((p) => p.id !== place.id));
+	};
 	return (
 		<div className="p-2">
-			<PlacesList places={filteredPlaces} />
+			<PlacesList places={filteredPlaces} onDelete={handleDelete} />
 		</div>
 	);
 };

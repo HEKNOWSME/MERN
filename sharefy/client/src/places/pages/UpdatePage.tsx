@@ -1,13 +1,22 @@
 import { useForm } from "react-hook-form";
 import { Place } from "./Places";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DUMMY_PLACES from "../../shared/components/DummpyPlaces";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 const UpdatePage = () => {
-	const [place, setPlace] = useState({ title: "", description: "" });
 	const { pid } = useParams();
-	const filteredPlace = DUMMY_PLACES.find((place) => place.id === pid);
-
+	useEffect(() => {
+		fetchData();
+	});
+	const fetchData = () => {
+		return DUMMY_PLACES;
+	};
+	const navigate = useNavigate();
+	const filteredPlace = fetchData().find((place) => place.id === pid);
+	const [place, setPlace] = useState({
+		title: filteredPlace?.title,
+		description: filteredPlace?.description,
+	});
 	const {
 		register,
 		handleSubmit,
@@ -15,7 +24,10 @@ const UpdatePage = () => {
 	} = useForm<Place>();
 	return (
 		<form
-			onSubmit={handleSubmit((data) => console.log(data))}
+			onSubmit={handleSubmit(() => {
+				console.log(place);
+				navigate("/u1/places");
+			})}
 			className="card p-3 w-50 m-auto mt-5"
 		>
 			<div className="card-header text-center">
@@ -31,7 +43,7 @@ const UpdatePage = () => {
 					name="title"
 					id="title"
 					className="form-control"
-					value={filteredPlace?.title}
+					value={place.title}
 					onChange={(e) => setPlace({ ...place, title: e.target.value })}
 				/>
 				{errors.title && (
@@ -54,7 +66,7 @@ const UpdatePage = () => {
 					id="description"
 					className="form-control"
 					placeholder="The description"
-					value={filteredPlace?.description}
+					value={place.description}
 					onChange={(e) => setPlace({ ...place, description: e.target.value })}
 				></textarea>
 				{errors.description && (

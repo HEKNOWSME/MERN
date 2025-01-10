@@ -3,7 +3,12 @@ import { Place } from "../pages/Places";
 import "./places.css";
 import PopUp from "./Model";
 import { useState } from "react";
-export const PlacesList = ({ places }: { places: Place[] }) => {
+
+interface Props {
+	places: Place[];
+	onDelete: (place: Place) => void;
+}
+export const PlacesList = ({places, onDelete} : Props) => {
 	const [isShowMap, setMap] = useState(false);
 	const [viewedPlace, setPlace] = useState<Place>({
 		id: "",
@@ -75,6 +80,7 @@ export const PlacesList = ({ places }: { places: Place[] }) => {
 								type="button"
 								className="btn btn-outline-danger"
 								disabled={isShowMap}
+								onClick={() => onDelete(place)}
 							>
 								Delete
 							</button>
