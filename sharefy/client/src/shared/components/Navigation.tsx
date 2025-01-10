@@ -1,15 +1,15 @@
 import { LuMenu } from "react-icons/lu";
 import "./nav.css";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
 const Navigation = () => {
 	const [toggle, setToggle] = useState(false);
-	const { userid } = useParams();
-
 	return (
 		<header
-			className={`bg-secondary text-light p-2 navigation ${toggle && "toggle"} position-sticky top-0 start-0 end-0 z-1`}
+			className={`bg-secondary text-light p-2 navigation ${
+				toggle && "toggle"
+			} position-sticky top-0 start-0 end-0 z-1`}
 		>
 			<div className="d-flex gap-2 menu">
 				<i className="hamburger" onClick={() => setToggle(!toggle)}>
@@ -45,7 +45,7 @@ const Navigation = () => {
 					</li>
 					<li>
 						<NavLink
-							to={`/${userid}/newPlace`}
+							to={`places/newPlace`}
 							className={({ isActive }: { isActive: boolean }) =>
 								`nav-link ${
 									isActive ? "bg-primary card text-light" : "text-light"
