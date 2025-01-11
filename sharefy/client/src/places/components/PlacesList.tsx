@@ -8,7 +8,7 @@ interface Props {
 	places: Place[];
 	onDelete: (place: Place) => void;
 }
-export const PlacesList = ({places, onDelete} : Props) => {
+export const PlacesList = ({ places, onDelete }: Props) => {
 	const [isShowMap, setMap] = useState(false);
 	const [viewedPlace, setPlace] = useState<Place>({
 		id: "",
@@ -90,7 +90,7 @@ export const PlacesList = ({places, onDelete} : Props) => {
 			</section>
 			{isShowMap && (
 				<PopUp
-					placeTitle={viewedPlace.address}
+					placeTitle={viewedPlace.title	}
 					imageUrl={viewedPlace.imageUrl}
 					description={viewedPlace.description}
 					onClose={handleOnclose}

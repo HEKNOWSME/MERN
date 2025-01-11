@@ -14,6 +14,7 @@ const UpdatePage = () => {
 	const navigate = useNavigate();
 	const filteredPlace = fetchData().find((place) => place.id === pid);
 	const [place, setPlace] = useState({
+		id: filteredPlace?.id,
 		title: filteredPlace?.title,
 		description: filteredPlace?.description,
 	});
@@ -26,7 +27,7 @@ const UpdatePage = () => {
 		<form
 			onSubmit={handleSubmit(() => {
 				console.log(place);
-				navigate("/u1/places");
+				navigate("/u1/places", { state: { place } });
 			})}
 			className="card p-3 w-50 m-auto mt-5"
 		>
