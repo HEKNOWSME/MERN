@@ -21,12 +21,11 @@ const UpdatePage = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
+		formState: { errors, isValid },
 	} = useForm<Place>();
 	return (
 		<form
 			onSubmit={handleSubmit(() => {
-				console.log(place);
 				navigate("/u1/places", { state: { place } });
 			})}
 			className="card p-3 w-50 m-auto mt-5"
@@ -74,12 +73,13 @@ const UpdatePage = () => {
 					<span className="text-danger">{errors.description.message}</span>
 				)}
 			</div>
-			<div className="mb-3 d-flex justify-content-between">
-				<button type="submit" className="btn btn-primary mx-4">
+			<div className="mb-3 d-flex justify-content-center">
+				<button
+					type="submit"
+					className="btn btn-primary mx-4"
+					disabled={!isValid}
+				>
 					Update Place
-				</button>
-				<button type="reset" className="btn btn-secondary mx-4">
-					Cancel
 				</button>
 			</div>
 		</form>

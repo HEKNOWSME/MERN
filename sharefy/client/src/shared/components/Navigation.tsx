@@ -1,10 +1,12 @@
 import { LuMenu } from "react-icons/lu";
 import "./nav.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
 
 const Navigation = () => {
 	const [toggle, setToggle] = useState(false);
+	const { pathname } = useLocation();
+
 	return (
 		<header
 			className={`bg-secondary text-light p-2 navigation ${
@@ -55,18 +57,20 @@ const Navigation = () => {
 							Add Place
 						</NavLink>
 					</li>
-					<li>
-						<NavLink
-							to="/auth"
-							className={({ isActive }: { isActive: boolean }) =>
-								`nav-link ${
-									isActive ? "bg-primary card text-light" : "text-light"
-								}`
-							}
-						>
-							Auth
-						</NavLink>
-					</li>
+					{pathname !== "/auth" && (
+						<li>
+							<NavLink
+								to="/auth"
+								className={({ isActive }: { isActive: boolean }) =>
+									`nav-link ${
+										isActive ? "bg-primary card text-light" : "text-light"
+									}`
+								}
+							>
+								Login
+							</NavLink>
+						</li>
+					)}
 				</ul>
 			</nav>
 		</header>

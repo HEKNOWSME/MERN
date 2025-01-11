@@ -7,6 +7,7 @@ import HomePage from "../HomePage";
 import Error from "./ErrorPage";
 import NewPlace from "../places/pages/NewPlace";
 import UpdatePage from "../places/pages/UpdatePage";
+import AuthPage from "../shared/components/AuthPage";
 
 const router = createBrowserRouter([
 	{
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
 			{ path: "/places/newPlace", element: <NewPlace /> },
 			{ path: "/places/:pid", element: <UpdatePage /> },
 			{ path: "/:userid/places", element: <Places /> },
+			{ path: "/auth", element: <AuthPage /> },
 		],
 	},
 ]);

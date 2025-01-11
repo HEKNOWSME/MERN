@@ -90,7 +90,7 @@ export const PlacesList = ({ places, onDelete }: Props) => {
 			</section>
 			{isShowMap && (
 				<PopUp
-					placeTitle={viewedPlace.title	}
+					placeTitle={viewedPlace.title}
 					imageUrl={viewedPlace.imageUrl}
 					description={viewedPlace.description}
 					onClose={handleOnclose}

@@ -5,7 +5,7 @@ const NewPlace = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
+		formState: { errors, isValid },
 	} = useForm<Place>();
 	return (
 		<form
@@ -67,7 +67,11 @@ const NewPlace = () => {
 				)}
 			</div>
 			<div className="mb-3 d-flex justify-content-between">
-				<button type="submit" className="btn btn-primary mx-4">
+				<button
+					type="submit"
+					className="btn btn-primary mx-4"
+					disabled={!isValid}
+				>
 					Add Place
 				</button>
 				<button type="reset" className="btn btn-secondary mx-4">
