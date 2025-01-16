@@ -32,18 +32,25 @@ const App = () => {
 		size: "Low",
 		status: "Active",
 	});
-	const [selected, setSelect] = useState({ category: "", status: "" });
+	const [selected, setSelect] = useState({
+		category: "",
+		status: "",
+		searched: "",
+	});
 	const handleAdd = () => {
 		if (task.task) {
 			setTasks([...tasks, task]);
-			setTask({ ...task, task: "" });
+			setTask({ ...task, task: "", id: task.id + 1 });
 		}
 	};
 	const filteredTasks = tasks.filter((tas) => {
 		const selectedCategory =
 			!selected.category || selected.category === tas.category;
 		const selectedStatus = !selected.status || selected.status === tas.status;
-		return selectedCategory && selectedStatus;
+		const searchedTask = tas.task
+			.toLowerCase()
+			.includes(selected.searched.toLowerCase());
+		return selectedCategory && selectedStatus && searchedTask;
 	});
 	return (
 		<div className="card m-1">
@@ -85,6 +92,12 @@ const App = () => {
 					onType={(e) => setSelect({ ...selected, category: e })}
 					type="select"
 					select="filterCategory"
+				/>
+				<Input
+					onType={(e) => {
+						setSelect({ ...selected, searched: e.toLowerCase() });
+					}}
+					type="search"
 				/>
 			</div>
 			<hr />

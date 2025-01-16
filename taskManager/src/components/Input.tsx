@@ -1,6 +1,6 @@
 import { categories, size, status } from "./Share";
 interface Props {
-	type: "text" | "password" | "email" | "select" | "button";
+	type: "text" | "password" | "email" | "select" | "button" | "search";
 	color?:
 		| "primary"
 		| "secondary"
@@ -106,6 +106,15 @@ const Input = ({
 				<button type="button" className={`btn btn-${color}`} onClick={onAdd}>
 					{title}
 				</button>
+			);
+		case "search":
+			return (
+				<input
+					type="search"
+					placeholder="search"
+					className="form-control placeholder-wave"
+					onChange={(text) => onType(text.target.value)}
+				/>
 			);
 		default:
 			return (
