@@ -43,6 +43,19 @@ const App = () => {
 			setTask({ ...task, task: "", id: task.id + 1 });
 		}
 	};
+	const handleDelete = (task: Task) => {
+		setTasks(tasks.filter((t) => t.id !== task.id));
+	};
+	const handleComplete = (task: Task) => {
+		if (task.status === "Active")
+			setTasks(
+				tasks.map((t) => (t.id === task.id ? { ...t, status: "Completed" } : t))
+			);
+		else
+			setTasks(
+				tasks.map((t) => (t.id === task.id ? { ...t, status: "Active" } : t))
+			);
+	};
 	const filteredTasks = tasks.filter((tas) => {
 		const selectedCategory =
 			!selected.category || selected.category === tas.category;
@@ -102,7 +115,11 @@ const App = () => {
 			</div>
 			<hr />
 			<div className="mx-2">
-				<TaskList tasks={filteredTasks} />
+				<TaskList
+					tasks={filteredTasks}
+					onDelete={handleDelete}
+					onComplete={handleComplete}
+				/>
 			</div>
 		</div>
 	);

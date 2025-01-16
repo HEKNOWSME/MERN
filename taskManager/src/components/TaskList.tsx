@@ -1,12 +1,12 @@
-import { useState } from "react";
 import { Task } from "../App";
 import { LuTrash, LuPenLine, LuSquare, LuSquareCheck } from "react-icons/lu";
-import "./Icon.css"
-type Tasks = {
+import "./Icon.css";
+interface Tasks {
 	tasks: Task[];
-};
-const TaskList = ({ tasks }: Tasks) => {
-	const [completed] = useState(false);
+	onDelete: (task: Task) => void;
+	onComplete: (task: Task) => void;
+}
+const TaskList = ({ tasks, onDelete, onComplete }: Tasks) => {
 	return (
 		<table className="table table-bordered">
 			<thead>
@@ -28,8 +28,13 @@ const TaskList = ({ tasks }: Tasks) => {
 						<td>{task.status}</td>
 						<td>{task.size}</td>
 						<td className="d-flex gap-1 ">
-							<i className="icon">
-								{completed ? (
+							<i
+								className="icon"
+								onClick={() => {
+									onComplete(task);
+								}}
+							>
+								{task.status === "Completed" ? (
 									<LuSquareCheck size={20} />
 								) : (
 									<LuSquare size={20} />
@@ -38,7 +43,7 @@ const TaskList = ({ tasks }: Tasks) => {
 							<i className="icon">
 								<LuPenLine size={20} color="blue" />
 							</i>
-							<i className="icon">
+							<i className="icon" onClick={() => onDelete(task)}>
 								<LuTrash size={20} color="red" />
 							</i>
 						</td>
