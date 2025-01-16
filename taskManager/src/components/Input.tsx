@@ -9,11 +9,11 @@ interface Props {
 		| "outline-secondary";
 	placeholder?: string;
 	id?: string;
+	value?: string;
 	title?: string;
 	select?: "category" | "size" | "status" | "filterCategory";
 	onType: (input: string) => void;
 	onAdd?: () => void;
-	onEnter: (key: string) => void;
 }
 const Input = ({
 	type,
@@ -24,7 +24,7 @@ const Input = ({
 	title,
 	color,
 	onAdd,
-	onEnter,
+	value,
 }: Props) => {
 	switch (type) {
 		case "select":
@@ -37,6 +37,7 @@ const Input = ({
 						<select
 							name={select}
 							id={id}
+							value={value}
 							className="form-select placeholder-wave"
 							onChange={(e) => {
 								onType(e.target.value);
@@ -70,6 +71,7 @@ const Input = ({
 							onChange={(e) => {
 								onType(e.target.value);
 							}}
+							value={value}
 						>
 							<option value="">All Status</option>
 							{status.map((st) => (
@@ -87,6 +89,7 @@ const Input = ({
 							onChange={(e) => {
 								onType(e.target.value);
 							}}
+							value={value}
 						>
 							<option value="">All Categories</option>
 							{categories.map((cat) => (
@@ -112,7 +115,7 @@ const Input = ({
 						id={id}
 						className="form-control placeholder-wave"
 						placeholder={placeholder}
-						onKeyUp={(e) => onEnter(e.key)}
+						value={value}
 						onChange={(e) => onType(e.target.value)}
 					/>
 				</div>

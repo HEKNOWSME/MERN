@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Task } from "../App";
 import { LuTrash, LuPenLine, LuSquare, LuSquareCheck } from "react-icons/lu";
+import "./Icon.css"
 type Tasks = {
 	tasks: Task[];
 };
@@ -20,24 +21,24 @@ const TaskList = ({ tasks }: Tasks) => {
 			</thead>
 			<tbody>
 				{tasks.map((task) => (
-					<tr>
+					<tr key={task.id}>
 						<th scope="row">{task.id}</th>
 						<td>{task.task}</td>
 						<td>{task.category}</td>
 						<td>{task.status}</td>
 						<td>{task.size}</td>
 						<td className="d-flex gap-1 ">
-							<i>
+							<i className="icon">
 								{completed ? (
 									<LuSquareCheck size={20} />
 								) : (
 									<LuSquare size={20} />
 								)}
 							</i>
-							<i>
+							<i className="icon">
 								<LuPenLine size={20} color="blue" />
 							</i>
-							<i>
+							<i className="icon">
 								<LuTrash size={20} color="red" />
 							</i>
 						</td>
