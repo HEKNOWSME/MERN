@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input from "./components/Input";
 import TaskList from "./components/TaskList";
+import EditTask from "./components/EditTask";
 export interface Task {
 	id: number;
 	task: string;
@@ -37,6 +38,8 @@ const App = () => {
 		status: "",
 		searched: "",
 	});
+
+	const [update, setUpdate] = useState(false);
 	const handleAdd = () => {
 		if (task.task) {
 			setTasks([...tasks, task]);
@@ -55,6 +58,10 @@ const App = () => {
 			setTasks(
 				tasks.map((t) => (t.id === task.id ? { ...t, status: "Active" } : t))
 			);
+	};
+	const handleEdit = (task: Task) => {
+		setUpdate(!update);
+		setTask(task);
 	};
 	const filteredTasks = tasks.filter((tas) => {
 		const selectedCategory =
@@ -114,12 +121,21 @@ const App = () => {
 				/>
 			</div>
 			<hr />
-			<div className="mx-2">
-				<TaskList
-					tasks={filteredTasks}
-					onDelete={handleDelete}
-					onComplete={handleComplete}
-				/>
+			<div className="mx-2 position-relative">
+				{update && (
+					<div className="position-absolute z-1 top-50 start-50 translate-middle">
+						<EditTask task={task} />
+					</div>
+				)}
+
+				<div className="z-0">
+					<TaskList
+						tasks={filteredTasks}
+						onDelete={handleDelete}
+						onComplete={handleComplete}
+						onEdit={handleEdit}
+					/>
+				</div>
 			</div>
 		</div>
 	);

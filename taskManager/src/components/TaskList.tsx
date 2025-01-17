@@ -5,8 +5,15 @@ interface Tasks {
 	tasks: Task[];
 	onDelete: (task: Task) => void;
 	onComplete: (task: Task) => void;
+	onEdit: (task: Task) => void;
 }
-const TaskList = ({ tasks, onDelete, onComplete }: Tasks) => {
+const TaskList = ({ tasks, onDelete, onComplete, onEdit }: Tasks) => {
+	if (tasks.length === 0)
+		return (
+			<div>
+				<h3 className="text-center">No task Remains</h3>
+			</div>
+		);
 	return (
 		<table className="table table-bordered">
 			<thead>
@@ -40,7 +47,7 @@ const TaskList = ({ tasks, onDelete, onComplete }: Tasks) => {
 									<LuSquare size={20} />
 								)}
 							</i>
-							<i className="icon">
+							<i className="icon" onClick={() => onEdit(task)}>
 								<LuPenLine size={20} color="blue" />
 							</i>
 							<i className="icon" onClick={() => onDelete(task)}>
