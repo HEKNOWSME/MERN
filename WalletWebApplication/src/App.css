@@ -1,0 +1,23 @@
+:root {
+   --color-accent: #20232A;
+   --color-secondary: #282C34;
+   --text-primary: #E6E6E6;  
+}
+.wrapper {
+   background-color: var(--color-accent);
+   color: var(--text-primary);
+   min-height: 100vh;
+   display: grid;
+   grid-template-columns: auto 1fr;
+}
+aside {
+   max-height: 100vh;
+   position: sticky;
+   left: 0;
+   top: 0;
+}
+main {
+   background-color: var(--text-primary);
+   color: #20232A;
+   padding: .5rem;
+}
