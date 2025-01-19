@@ -1,50 +1,45 @@
-# React + TypeScript + Vite
+# Wallet Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive **Wallet Web Application** built with **React** and **TypeScript**. This application helps users track all in-and-out transactions, set budgets, categorize expenses, and visualize data effectively.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Track Transactions**: Monitor all income and expenses from various accounts (Cash, Bank, Mobile Money).
+- **Generate Reports**: View transaction summaries for a specified time range.
+- **Budget Management**: Set a budget limit; receive notifications when it’s exceeded.
+- **Categorization**:
+  - Add categories and subcategories for detailed spending insights.
+  - Link transactions to relevant categories or subcategories.
+- **Visualization**:
+  - Display transaction summaries with dynamic **charts** (e.g., pie charts).
+  - View summary cards for Total Income, Total Expenses, Total Balance, and Budget Remaining.
+- **Responsive Design**: Fully optimized for desktop and mobile devices.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tech Stack
 
-- Configure the top-level `parserOptions` property like this:
+- **Frontend**: React (with TypeScript)
+- **State Management**: React Hooks (`useState`, `useForm`)
+- **Styling**: CSS Grid & Flexbox as well as bostsrap
+- **Icons**: `react-icons` (Luc icons)
+- **Visualization**: `react-chartjs-2` 
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Installation
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Follow these steps to get started with the project locally:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+### Prerequisites
+- Node.js and npm installed.
+
+### Steps
+1. Clone the repository:
+(https://github.com/HEKNOWSME/MERN/tree/main/WalletWebApplication)
+2. cd WalletWebApplication
+3. Install dependencies: npm install
+4. Start the development server: npm run dev
+
+
+
