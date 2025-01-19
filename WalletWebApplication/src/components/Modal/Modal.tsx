@@ -1,13 +1,14 @@
 import { useForm } from "react-hook-form";
 import { Transaction } from "../transactions/Transactions";
 import "./Modal.css";
-import { accounts, subCategories } from "../share/shares";
+import { accounts } from "../share/shares";
 interface Props {
 	onClose: () => void;
 	onSubmit: (data: Transaction) => void;
-	categories: string[]
+	subCategories: string[];
+	categories: string[];
 }
-const Modal = ({ onClose, onSubmit, categories }: Props) => {
+const Modal = ({ onClose, onSubmit, categories, subCategories }: Props) => {
 	const {
 		register,
 		handleSubmit,
@@ -52,7 +53,7 @@ const Modal = ({ onClose, onSubmit, categories }: Props) => {
 					name="description"
 					id="description"
 					className="form-control placeholder-wave"
-					placeholder="Add description"
+					placeholder="Description..."
 				/>
 				{errors.description && (
 					<span className="text-danger">{errors.description.message}</span>
@@ -68,7 +69,7 @@ const Modal = ({ onClose, onSubmit, categories }: Props) => {
 					name="amount"
 					id="amount"
 					className="form-control placeholder-wave"
-					placeholder="Add amount"
+					placeholder="Amount $"
 				/>
 				{errors.amount && (
 					<span className="text-danger">{errors.amount.message}</span>
@@ -82,8 +83,11 @@ const Modal = ({ onClose, onSubmit, categories }: Props) => {
 					className="form-select placeholder-wave"
 					aria-label="category"
 				>
+					<option value="">Choose Category</option>
 					{categories.map((cat) => (
-						<option value={cat} key={cat}>{cat}</option>
+						<option value={cat} key={cat}>
+							{cat}
+						</option>
 					))}
 				</select>
 				{errors.category && (
@@ -98,9 +102,11 @@ const Modal = ({ onClose, onSubmit, categories }: Props) => {
 					className="form-select placeholder-wave"
 					aria-label="subCategory"
 				>
-					
-					{subCategories.map((cat) => (
-						<option value={cat} key={cat}>{cat}</option>
+					<option value="">Choose SubCategory</option>
+					{subCategories.map((cat, index) => (
+						<option value={cat} key={index}>
+							{cat}
+						</option>
 					))}
 				</select>
 				{errors.subCategory && (
@@ -115,8 +121,8 @@ const Modal = ({ onClose, onSubmit, categories }: Props) => {
 					className="form-select placeholder-wave"
 					aria-label="account"
 				>
-					{accounts.map((acc) => (
-						<option value= {acc}>{acc}</option>
+					{accounts.map((acc, i) => (
+						<option value={acc} key={i}>{acc}</option>
 					))}
 				</select>
 				{errors.account && (

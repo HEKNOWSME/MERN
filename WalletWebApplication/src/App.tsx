@@ -9,6 +9,7 @@ import Reports from "./components/reports/Reports";
 import Modal from "./components/Modal/Modal";
 import { categories, subCategories } from "./components/share/shares";
 import Categories from "./components/Modal/Category";
+import { LuCirclePlus } from "react-icons/lu";
 const App = () => {
 	const [clickedPlace, setPlace] = useState("");
 	const [showModal, setModal] = useState({
@@ -18,6 +19,13 @@ const App = () => {
 	const [transactions, setTransactions] = useState<Transaction[]>([]);
 	const [allCategories, setCategory] = useState(categories);
 	const [allSubCategories, setSubCategory] = useState(subCategories);
+	const [budget, setBudget] = useState(0);
+	const [dateFilter, setDateFilter] = useState({ from: "", to: "" });
+
+	const filteredDate = transactions.filter(
+		(transact) =>
+			transact.date > dateFilter.from && transact.date < dateFilter.to
+	);
 	return (
 		<div className="wrapper">
 			<aside className="p-2">
@@ -40,7 +48,7 @@ const App = () => {
 						<div className="d-flex justify-content-between mb-3">
 							<button
 								type="button"
-								className="btn btn-primary"
+								className="btn btn-primary d-flex align-items-center gap-2"
 								onClick={() =>
 									setModal({
 										...showModal,
@@ -49,11 +57,12 @@ const App = () => {
 									})
 								}
 							>
-								Add Transaction
+								<LuCirclePlus />
+								<span>Add Transaction</span>
 							</button>
 							<button
 								type="button"
-								className="btn btn-secondary"
+								className="btn btn-secondary d-flex align-items-center gap-2"
 								onClick={() =>
 									setModal({
 										...showModal,
@@ -62,12 +71,14 @@ const App = () => {
 									})
 								}
 							>
-								Add Category
+								<LuCirclePlus />
+								<span>Add Category</span>
 							</button>
 						</div>
 						{showModal.transaction && (
 							<Modal
 								categories={allCategories}
+								subCategories={allSubCategories}
 								onClose={() => setModal({ ...showModal, transaction: false })}
 								onSubmit={(transaction) => {
 									setTransactions([...transactions, transaction]);
@@ -81,14 +92,30 @@ const App = () => {
 								onSubmit={(cat) => {
 									setCategory([...allCategories, cat.category]);
 									setSubCategory([...allSubCategories, cat.subCategory]);
+									setModal({ category: false, transaction: false });
 								}}
 							/>
 						)}
 						<Transactions transactions={transactions} />
 					</div>
 				)}
-				{clickedPlace === "budget" && <Budget />}
-				{clickedPlace === "reports" && <Reports />}
+				{clickedPlace === "budget" && (
+					<Budget
+						budget={budget}
+						onSave={(amount) => setBudget(amount.budget)}
+					/>
+				)}
+				{clickedPlace === "reports" && (
+					<div>
+						{" "}
+						<Reports
+							onReport={(report) =>
+								setDateFilter({ from: report.from, to: report.to })
+							}
+						/>
+						<Transactions transactions={filteredDate} />
+					</div>
+				)}
 			</main>
 		</div>
 	);

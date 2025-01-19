@@ -47,7 +47,6 @@ const Categories = ({ onClose, onSubmit }: Props) => {
 			<div className="mb-3">
 				<input
 					{...register("subCategory", {
-						required: "Field required",
 						maxLength: { value: 20, message: "Do not exceed 20 characters" },
 					})}
 					type="text"
@@ -56,9 +55,6 @@ const Categories = ({ onClose, onSubmit }: Props) => {
 					className="form-control placeholder-wave"
 					placeholder="Add subCategory"
 				/>
-				{errors.subCategory && (
-					<span className="text-danger">{errors.subCategory.message}</span>
-				)}
 			</div>
 			<button type="submit" className="btn btn-primary">
 				Save Category{" "}

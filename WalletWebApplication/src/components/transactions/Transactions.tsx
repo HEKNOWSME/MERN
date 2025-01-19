@@ -4,7 +4,7 @@ export interface Transaction {
 	amount: number;
 	description: string;
 	category: string;
-	account: string;
+	account: "Cash" | "Bank" | "Mobile Money";
 	date: string;
 	subCategory: string;
 }
@@ -15,7 +15,7 @@ const Transactions = ({ transactions }: Props) => {
 	if (transactions.length === 0)
 		return (
 			<div>
-				<h3 className="text-center">No Transaction Remains</h3>
+				<h3 className="text-center">No Transaction Here</h3>
 			</div>
 		);
 	return (

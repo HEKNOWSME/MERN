@@ -35,10 +35,24 @@ const Dashboard = () => {
 						235
 					</span>
 				</p>
-         </div>
-         <div className="card">
-            <h3 className="card-header">Statistic Graph Here</h3>
-         </div>
+			</div>
+			<div className="card">
+				<p className="card-header d-flex flex-column gap-2">
+					<span className="fw-bolder">Budget Remaining</span>
+					<span>
+						<i>
+							<LuDollarSign />
+						</i>
+						0.00
+					</span>
+				</p>
+			</div>
+			<div className="card">
+				<h3 className="card-header">Spending by Category</h3>
+			</div>
+			<div className="card">
+				<h3 className="card-header">Monthly Overview</h3>
+			</div>
 		</div>
 	);
 };
