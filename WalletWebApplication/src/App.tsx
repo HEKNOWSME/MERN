@@ -7,16 +7,17 @@ import Transactions from "./components/transactions/Transactions";
 import Budget from "./components/budget/Budget";
 import Reports from "./components/reports/Reports";
 import Modal from "./components/Modal/Modal";
-import Category from "./components/Modal/Category";
-import Account from "./components/Modal/Account";
+import { categories, subCategories } from "./components/share/shares";
+import Categories from "./components/Modal/Category";
 const App = () => {
 	const [clickedPlace, setPlace] = useState("");
 	const [showModal, setModal] = useState({
 		transaction: false,
 		category: false,
-		account: false,
 	});
-	const [transactions] = useState<Transaction[]>([]);
+	const [transactions, setTransactions] = useState<Transaction[]>([]);
+	const [allCategories, setCategory] = useState(categories);
+	const [allSubCategories, setSubCategory] = useState(subCategories);
 	return (
 		<div className="wrapper">
 			<aside className="p-2">
@@ -26,7 +27,6 @@ const App = () => {
 						setModal({
 							...showModal,
 							transaction: false,
-							account: false,
 							category: false,
 						});
 					}}
@@ -45,7 +45,6 @@ const App = () => {
 									setModal({
 										...showModal,
 										transaction: !showModal.transaction,
-										account: false,
 										category: false,
 									})
 								}
@@ -60,40 +59,29 @@ const App = () => {
 										...showModal,
 										transaction: false,
 										category: !showModal.category,
-										account: false,
 									})
 								}
 							>
 								Add Category
 							</button>
-							<button
-								type="button"
-								className="btn btn-secondary"
-								onClick={() =>
-									setModal({
-										...showModal,
-										transaction: false,
-										category: false,
-										account: !showModal.account,
-									})
-								}
-							>
-								Add Account
-							</button>
 						</div>
 						{showModal.transaction && (
 							<Modal
+								categories={allCategories}
 								onClose={() => setModal({ ...showModal, transaction: false })}
+								onSubmit={(transaction) => {
+									setTransactions([...transactions, transaction]);
+									setModal({ category: false, transaction: false });
+								}}
 							/>
 						)}
 						{showModal.category && (
-							<Category
+							<Categories
 								onClose={() => setModal({ ...showModal, category: false })}
-							/>
-						)}
-						{showModal.account && (
-							<Account
-								onClose={() => setModal({ ...showModal, account: false })}
+								onSubmit={(cat) => {
+									setCategory([...allCategories, cat.category]);
+									setSubCategory([...allSubCategories, cat.subCategory]);
+								}}
 							/>
 						)}
 						<Transactions transactions={transactions} />

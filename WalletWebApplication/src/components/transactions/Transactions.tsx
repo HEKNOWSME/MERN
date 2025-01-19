@@ -6,6 +6,7 @@ export interface Transaction {
 	category: string;
 	account: string;
 	date: string;
+	subCategory: string;
 }
 type Props = {
 	transactions: Transaction[];
@@ -43,10 +44,7 @@ const Transactions = ({ transactions }: Props) => {
 							<td scope="row">{transaction.account}</td>
 							<td scope="row">{transaction.amount}</td>
 							<td scope="row">{transaction.type}</td>
-							<td scope="row">
-								<button type="button" className="btn btn-outline-primary">
-									Edit
-								</button>
+							<td scope="row" className="d-flex justify-content-center">
 								<button type="button" className="btn btn-outline-danger">
 									Delete
 								</button>
