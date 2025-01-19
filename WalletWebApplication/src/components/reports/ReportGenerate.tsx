@@ -1,26 +1,22 @@
-export interface Transaction {
-	id: number;
-	type: "income" | "expense";
-	amount: number;
-	description: string;
-	category: string;
-	account: "Cash" | "Bank" | "Mobile Money";
-	date: string;
-	subCategory: string;
-}
+import { Transaction } from "../transactions/Transactions";
+
 type Props = {
 	transactions: Transaction[];
-	onDelete: (transaction: Transaction) => void;
+	from: string;
+	to: string;
 };
-const Transactions = ({ transactions, onDelete }: Props) => {
+const ReportsGenerate = ({ transactions, from, to }: Props) => {
 	if (transactions.length === 0)
 		return (
 			<div>
-				<h3 className="text-center">No Transaction Here</h3>
+				<h3 className="text-center">No Reports Here</h3>
 			</div>
 		);
 	return (
 		<div>
+			<p className="fw-bolder text-center">
+				Reports from {from} up to {to}
+			</p>
 			<table className="table table-bordered">
 				<thead>
 					<tr>
@@ -30,30 +26,20 @@ const Transactions = ({ transactions, onDelete }: Props) => {
 						<th scope="col">Account</th>
 						<th scope="col">Amount</th>
 						<th scope="col">Type</th>
-						<th scope="col">Actions</th>
 					</tr>
 				</thead>
 				<tbody className="tab-content">
 					{transactions.length === 0 && (
 						<h3 className="text-center">No Transaction Remains</h3>
 					)}
-					{transactions.map((transaction, index) => (
-						<tr key={index}>
+					{transactions.map((transaction) => (
+						<tr key={transaction.id}>
 							<td scope="row">{transaction.date}</td>
 							<td scope="row">{transaction.description}</td>
 							<td scope="row">{transaction.category}</td>
 							<td scope="row">{transaction.account}</td>
 							<td scope="row">{transaction.amount}</td>
 							<td scope="row">{transaction.type}</td>
-							<td scope="row" className="d-flex justify-content-center">
-								<button
-									type="button"
-									className="btn btn-outline-danger"
-									onClick={() => onDelete(transaction)}
-								>
-									Delete
-								</button>
-							</td>
 						</tr>
 					))}
 				</tbody>
@@ -62,4 +48,4 @@ const Transactions = ({ transactions, onDelete }: Props) => {
 	);
 };
 
-export default Transactions;
+export default ReportsGenerate;

@@ -10,6 +10,7 @@ import Modal from "./components/Modal/Modal";
 import { categories, subCategories } from "./components/share/shares";
 import Categories from "./components/Modal/Category";
 import { LuCirclePlus } from "react-icons/lu";
+import ReportsGenerate from "./components/reports/ReportGenerate";
 const App = () => {
 	const [clickedPlace, setPlace] = useState("");
 	const [showModal, setModal] = useState({
@@ -26,6 +27,9 @@ const App = () => {
 		(transact) =>
 			transact.date > dateFilter.from && transact.date < dateFilter.to
 	);
+	const handleDelete = (transaction: Transaction) => {
+		setTransactions(transactions.filter((t) => t.id !== transaction.id));
+	};
 	return (
 		<div className="wrapper">
 			<aside className="p-2">
@@ -41,8 +45,12 @@ const App = () => {
 				/>
 			</aside>
 			<main className={`position-relative ${showModal && "z-0"}`}>
-				{clickedPlace === "" && <Dashboard />}
-				{clickedPlace === "dashboard" && <Dashboard />}
+				{clickedPlace === "" && (
+					<Dashboard transactions={transactions} budget={budget} />
+				)}
+				{clickedPlace === "dashboard" && (
+					<Dashboard transactions={transactions} budget={budget} />
+				)}
 				{clickedPlace === "transactions" && (
 					<div>
 						<div className="d-flex justify-content-between mb-3">
@@ -96,7 +104,7 @@ const App = () => {
 								}}
 							/>
 						)}
-						<Transactions transactions={transactions} />
+						<Transactions transactions={transactions} onDelete={handleDelete} />
 					</div>
 				)}
 				{clickedPlace === "budget" && (
@@ -113,7 +121,11 @@ const App = () => {
 								setDateFilter({ from: report.from, to: report.to })
 							}
 						/>
-						<Transactions transactions={filteredDate} />
+						<ReportsGenerate
+							transactions={filteredDate}
+							from={dateFilter.from}
+							to={dateFilter.to}
+						/>
 					</div>
 				)}
 			</main>

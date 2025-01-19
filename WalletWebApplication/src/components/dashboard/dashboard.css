@@ -1,4 +1,31 @@
 .dashboard {
-   display: grid;
-   gap: 1rem;
+	display: grid;
+	gap: 1.5rem;
+	padding: 1rem;
+	grid-template-columns: 1fr;
 }
+
+.charts {
+   width: 400px;
+   justify-self: center;
+}
+.summary-cards {
+   display: flex;
+   
+   gap: 1rem;
+   justify-content: center;
+}
+@media (max-width: 768px) {
+	.dashboard {
+		grid-template-columns: 1fr;
+	}
+
+	.charts {
+		justify-content: center;
+	}
+   .summary-cards {
+      flex-direction: column;
+   }
+}
+
+

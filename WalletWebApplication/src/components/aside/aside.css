@@ -4,3 +4,8 @@
 .icon {
    cursor: pointer;
 }
+@media screen and (max-width: 768px) {
+   .icon_paragraph {
+      display: none;
+   }
+}
